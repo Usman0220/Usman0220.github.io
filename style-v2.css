@@ -20,13 +20,42 @@ header {
     text-align: center;
     border-bottom: 1px solid #e5e5e5;
     padding-bottom: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
 header h1 {
     font-size: 2.8rem;
     color: #1c2a48;
     margin-bottom: 0.5rem;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+#search-bar {
+    width: 40%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.nav-links a {
+    margin-left: 1.5rem;
+    text-decoration: none;
+    color: #4a90e2;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #357abd;
 }
 
 .mnemonic-category h2 {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Mnemonics v1.6</title>
+    <title>Medical Mnemonics v1.7</title>
     <link rel="stylesheet" href="style-v2.css">
 </head>
 <body>
@@ -12,9 +12,20 @@
             <h1>Medical Mnemonics</h1>
             <p>A collection of mnemonics to help remember important medical information.</p>
         </header>
+
+        <nav class="main-nav">
+            <input type="text" id="search-bar" placeholder="Search mnemonics...">
+            <div class="nav-links">
+                <a href="#anatomy">Anatomy</a>
+                <a href="#clinical">Clinical</a>
+                <a href="#pharma">Pharmacology</a>
+                <a href="#conditions">Conditions</a>
+            </div>
+        </nav>
+
         <main>
             <div class="mnemonic-category">
-                <h2>Anatomy</h2>
+                <h2 id="anatomy">Anatomy</h2>
                 <div class="mnemonic-card">
                     <h3>Cranial Nerves</h3>
                     <p class="mnemonic-phrase">"On Occasion, Our Trusty Truck Acts Funny, Very Good Vehicle AnyHow."</p>
@@ -59,7 +70,7 @@
                 </div>
             </div>
             <div class="mnemonic-category">
-                <h2>Clinical Assessment</h2>
+                <h2 id="clinical">Clinical Assessment</h2>
                 <div class="mnemonic-card">
                     <h3>Stroke Symptoms</h3>
                     <p class="mnemonic-phrase">"BE-FAST"</p>
@@ -104,7 +115,7 @@
                 </div>
             </div>
             <div class="mnemonic-category">
-                <h2>Pharmacology</h2>
+                <h2 id="pharma">Pharmacology</h2>
                 <div class="mnemonic-card">
                     <h3>Beta Blockers</h3>
                     <p class="mnemonic-phrase">"The -olol's"</p>
@@ -140,7 +151,7 @@
                 </div>
             </div>
             <div class="mnemonic-category">
-                <h2>Diseases and Conditions</h2>
+                <h2 id="conditions">Diseases and Conditions</h2>
                 <div class="mnemonic-card">
                     <h3>Causes of Pancreatitis</h3>
                     <p class="mnemonic-phrase">"I GET SMASHED"</p>
