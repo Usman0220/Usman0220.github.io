@@ -70,6 +70,13 @@ header h1 {
     margin: 0;
 }
 
+.mnemonic-answer img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    border-radius: 4px;
+}
+
 .toggle-answer {
     background-color: #4a90e2;
     color: white;
