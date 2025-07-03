@@ -1,0 +1,123 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 2rem;
+    background: #f7f9fc;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
+}
+
+header {
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+header h1 {
+    font-size: 2.8rem;
+    color: #1c2a48;
+    margin-bottom: 0.5rem;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+#search-bar {
+    width: 40%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.nav-links a {
+    margin-left: 1.5rem;
+    text-decoration: none;
+    color: #4a90e2;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #357abd;
+}
+
+.mnemonic-category h2 {
+    font-size: 2rem;
+    color: #333;
+    border-bottom: 3px solid #4a90e2;
+    padding-bottom: 0.6rem;
+    margin-bottom: 2rem;
+}
+
+.mnemonic-card {
+    background: #fdfdfd;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 1.8rem;
+    margin-bottom: 1.8rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.mnemonic-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.mnemonic-phrase {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 1.2rem;
+}
+
+.mnemonic-answer {
+    display: none;
+    margin-top: 1.2rem;
+    padding: 1.2rem;
+    background: #e9f5ff;
+    border-left: 4px solid #4a90e2;
+    border-radius: 4px;
+}
+
+.mnemonic-answer p {
+    margin: 0;
+}
+
+.mnemonic-answer img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    border-radius: 4px;
+}
+
+.toggle-answer {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-answer:hover {
+    background-color: #357abd;
+}
