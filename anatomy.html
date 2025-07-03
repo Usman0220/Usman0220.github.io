@@ -7,19 +7,39 @@
     <link rel="stylesheet" href="style-v2.css">
     <style>
         .anatomy-section {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .anatomy-section:last-child {
+            border-bottom: none;
         }
         .anatomy-section img {
             max-width: 100%;
             height: auto;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-            margin-top: 1rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         .anatomy-description {
-            margin-top: 0.5rem;
+            margin-top: 1rem;
             font-style: italic;
-            color: #555;
+            color: #666;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .anatomy-details {
+            background-color: #f5f9ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+        .anatomy-details h3 {
+            color: #4a90e2;
+            margin-top: 0;
         }
     </style>
 </head>
@@ -45,14 +65,34 @@
                 <p>The human skull consists of the cranial and facial bones. It encases and protects the brain and supports the structures of the face.</p>
                 <img src="media/anatomy/head.jpg" alt="Anatomical illustration of the human skull">
                 <p class="anatomy-description">Source: Licensed educational resource</p>
+                
+                <div class="anatomy-details">
+                    <h3>Major Components of the Skull</h3>
+                    <p>The skull is divided into two main sections:</p>
+                    <ul>
+                        <li><strong>Cranium:</strong> Houses and protects the brain, composed of 8 bones</li>
+                        <li><strong>Facial Bones:</strong> 14 bones that form the structure of the face</li>
+                    </ul>
+                    <p>Together, these structures provide attachment points for muscles and form the cavities for sensory organs like the eyes, nose, and ears.</p>
+                </div>
             </section>
 
             <section class="anatomy-section" id="hand">
                 <h2>Hand Anatomy</h2>
-                <p>The human hand is composed of 27 bones and is capable of a wide range of movement and dexterity.</p>
-                <!-- Placeholder for hand image -->
+                <p>The human hand is composed of 27 bones and is capable of a wide range of movement and dexterity, making it one of the most versatile anatomical structures.</p>
                 <img src="media/anatomy/hand.jpg" alt="Anatomical illustration of the human hand">
-                <p class="anatomy-description">Image and description coming soon.</p>
+                <p class="anatomy-description">Source: Anatomy and Biomechanics of the Hand, Clinical Publications</p>
+                
+                <div class="anatomy-details">
+                    <h3>Key Structures of the Hand</h3>
+                    <p>The hand consists of three main types of bones:</p>
+                    <ul>
+                        <li><strong>Carpals:</strong> Eight small bones that form the wrist and base of the hand, arranged in two rows of four bones each</li>
+                        <li><strong>Metacarpals:</strong> Five bones that form the palm of the hand</li>
+                        <li><strong>Phalanges:</strong> Fourteen bones that make up the fingers (three in each finger, two in the thumb)</li>
+                    </ul>
+                    <p>The hand also contains numerous muscles, tendons, ligaments, and nerves that enable its complex movements and sensory capabilities.</p>
+                </div>
             </section>
 
             <section class="anatomy-section" id="heart">
