@@ -802,3 +802,158 @@ section {
     animation-delay: 0.5s;
 }
 
+/* Publications Page Styles */
+.publications {
+    background: white;
+    padding-top: 7rem;
+}
+
+.publications-category {
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.publications-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.publications-category h3 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #2563eb;
+    display: inline-block;
+}
+
+.publications-category ul {
+    list-style: none;
+}
+
+.publications-category li {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.publications-category li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.1);
+}
+
+.publications-category li h4 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.publications-category li p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.publications-category p {
+    color: #64748b;
+    line-height: 1.6;
+    padding: 0.5rem;
+}
+
+/* Publication tags */
+.publication-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.publication-tag {
+    background: #2563eb;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Publication date and status */
+.publication-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.publication-status {
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.7rem;
+}
+
+.status-published {
+    background: #10b981;
+    color: white;
+}
+
+.status-preprint {
+    background: #f59e0b;
+    color: white;
+}
+
+.status-in-review {
+    background: #3b82f6;
+    color: white;
+}
+
+/* Responsive design for publications */
+@media (max-width: 768px) {
+    .publications {
+        padding-top: 6rem;
+    }
+    
+    .publications-category {
+        padding: 1.5rem;
+    }
+    
+    .publications-category li {
+        padding: 1.2rem;
+    }
+    
+    .publications-category h3 {
+        font-size: 1.3rem;
+    }
+    
+    .publications-category li h4 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .publications {
+        padding-top: 5rem;
+    }
+    
+    .publications-category {
+        padding: 1.2rem;
+    }
+    
+    .publications-category h3 {
+        font-size: 1.2rem;
+    }
+    
+    .publication-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
