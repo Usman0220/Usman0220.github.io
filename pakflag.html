@@ -16,11 +16,29 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 4px;
         }
-        .coming-soon {
-            background-color: #ffe8e8;
-            border-left: 4px solid #ff5252;
+        .audio-container {
+            background-color: #e8f4ff;
+            border-left: 4px solid #4a90e2;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        .audio-container p {
+            margin-bottom: 1rem;
+        }
+        .audio-container audio {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .anthem-info {
+            font-style: italic;
+            color: #555;
+            margin-top: 0.5rem;
+        }
+        .anthem-text {
+            margin-top: 1.5rem;
             padding: 1rem;
-            margin: 1rem 0;
+            background-color: #f5f5f5;
             border-radius: 4px;
         }
     </style>
@@ -53,8 +71,17 @@
             <section>
                 <h2>National Anthem</h2>
                 <p>Listen to the soulful and inspiring national anthem of Pakistan, 'Qaumi Taranah'.</p>
-                <div class="coming-soon">
-                    <p><strong>Coming Soon:</strong> The audio file for the national anthem will be added shortly.</p>
+                <div class="audio-container">
+                    <p><strong>Qaumi Taranah</strong> (قومی ترانہ) - Pakistan's national anthem was officially adopted in August 1954. The lyrics were written by Ahmed Ghulam Ali Chagla and the music was composed by Hafeez Jullundhri.</p>
+                    <audio controls>
+                        <source src="media/pakflag/anthem.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <p class="anthem-info">Source: Official recording from the Pakistan Embassy</p>
+                    <div class="anthem-text">
+                        <p>The anthem is written in Persian and uses highly Persianized Urdu. It consists of three stanzas, of which only the first one is sung on official occasions.</p>
+                        <p>It celebrates the aspirations of the people of Pakistan, the country's heritage, and its sacred land.</p>
+                    </div>
                 </div>
             </section>
         </main>
