@@ -7,7 +7,7 @@
     <title>Muhammad Usman - Medical Tech Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style-v3.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -53,17 +53,18 @@
     <section id="home" class="hero">
         <div class="hero-container">
             <h1 class="hero-title">Muhammad Usman</h1>
-            <p class="hero-subtitle">Medical Student & Tech Enthusiast</p>
-            <p class="hero-description">🚀 Passionate about bridging medicine and technology<br>
-            📍 4th Year Medical Student at CMH Multan Institute of Medical Sciences</p>
+            <p class="hero-subtitle">Innovating at the Intersection of Medicine & Cybersecurity</p>
+            <p class="hero-description">🚀 4th Year Medical Student leveraging AI, Data Science, and Cybersecurity to solve complex healthcare challenges.<br>
+            📍 CMH Multan Institute of Medical Sciences</p>
             <div class="hero-tags">
-                <span class="tag">🔬 Systematic Reviewer</span>
+                <span class="tag medical">🔬 Medical Research</span>
+                <span class="tag medical">🧬 Systematic Reviewer</span>
                 <span class="tag">🧠 AI & Data Science</span>
-                <span class="tag">🔐 Cybersecurity</span>
-                <span class="tag">⚙️ Mechanic by Passion</span>
+                <span class="tag cyber">🔐 Cybersecurity</span>
+                <span class="tag cyber">🛡️ Web Security</span>
             </div>
             <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#projects" class="btn btn-primary">Explore Projects</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
             </div>
         </div>
@@ -78,20 +79,20 @@
                     <p>I'm a 4th-year medical student at CMH Multan Institute of Medical Sciences (CIMS), Pakistan, with a unique passion for bridging medicine and technology. My journey combines rigorous medical education with cutting-edge technology skills.</p>
                     
                     <div class="about-highlights">
-                        <div class="highlight">
+                        <div class="highlight medical-highlight">
                             <i class="fas fa-stethoscope"></i>
-                            <h4>Medical Professional in Making</h4>
-                            <p>Specializing in Community Medicine, Ophthalmology, and Emergency Medicine</p>
+                            <h4>Medical Expertise & Research</h4>
+                            <p>Focus on Community Medicine, Ophthalmology, Emergency Medicine. Expert in Systematic Reviews (PRISMA, RevMan, JBI).</p>
                         </div>
-                        <div class="highlight">
+                        <div class="highlight ai-highlight">
                             <i class="fas fa-brain"></i>
-                            <h4>Research & Analysis</h4>
-                            <p>Expert in Systematic Reviews, Meta-Analysis using PRISMA, RevMan, and JBI methodologies</p>
+                            <h4>AI & Data Science in Healthcare</h4>
+                            <p>Developing AI-driven solutions for medical imaging, diagnostics, and data analysis to improve patient outcomes.</p>
                         </div>
-                        <div class="highlight">
+                        <div class="highlight cyber-highlight">
                             <i class="fas fa-shield-alt"></i>
-                            <h4>Cybersecurity & AI</h4>
-                            <p>Passionate about web security, bug hunting, and developing AI solutions for healthcare</p>
+                            <h4>Cybersecurity in Health Tech</h4>
+                            <p>Dedicated to securing medical data and systems through web security, bug hunting, and threat analysis.</p>
                         </div>
                     </div>
                     
@@ -123,8 +124,8 @@
         <div class="container">
             <h2 class="section-title">🧠 Skills & Domains</h2>
             <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-hospital"></i> Medical & Research</h3>
+                <div class="skill-category medical-category">
+                    <h3><i class="fas fa-briefcase-medical"></i> Medical & Research</h3>
                     <div class="skill-items">
                         <span class="skill-item">Community Medicine</span>
                         <span class="skill-item">Ophthalmology</span>
@@ -137,8 +138,8 @@
                     </div>
                 </div>
                 
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Programming & AI</h3>
+                <div class="skill-category ai-category">
+                    <h3><i class="fas fa-robot"></i> Programming & AI</h3>
                     <div class="skill-items">
                         <span class="skill-item">Python</span>
                         <span class="skill-item">C</span>
@@ -152,8 +153,8 @@
                     </div>
                 </div>
                 
-                <div class="skill-category">
-                    <h3><i class="fas fa-shield-alt"></i> Cybersecurity</h3>
+                <div class="skill-category cyber-category">
+                    <h3><i class="fas fa-user-secret"></i> Cybersecurity</h3>
                     <div class="skill-items">
                         <span class="skill-item">Web App Security</span>
                         <span class="skill-item">XSS Detection</span>
@@ -188,9 +189,9 @@
         <div class="container">
             <h2 class="section-title">📊 Featured Projects</h2>
             <div class="projects-grid">
-                <div class="project-card featured">
+                <div class="project-card featured medical-project"> <!-- Added medical-project class -->
                     <div class="project-image">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye-dropper"></i> <!-- Changed icon -->
                     </div>
                     <div class="project-content">
                         <h3>Diabetic Retinopathy Detector</h3>
@@ -199,17 +200,18 @@
                             <span>Python</span>
                             <span>OpenCV</span>
                             <span>Machine Learning</span>
+                            <span class="medical-tag">Healthcare AI</span> <!-- Specific tag -->
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Usman0220" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
+                            <a href="#" class="project-link"><i class="fas fa-desktop"></i> Demo</a> <!-- Changed icon -->
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card">
+                <div class="project-card featured cyber-featured cyber-project"> <!-- Added cyber-project and cyber-featured -->
                     <div class="project-image">
-                        <i class="fas fa-bug"></i>
+                        <i class="fas fa-shield-virus"></i> <!-- Changed icon -->
                     </div>
                     <div class="project-content">
                         <h3>XSS Detection Suite</h3>
@@ -218,17 +220,18 @@
                             <span>Python</span>
                             <span>Burp Suite</span>
                             <span>XSStrike</span>
+                            <span class="cyber-tag">Security Tool</span> <!-- Specific tag -->
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Usman0220" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
+                            <a href="#" class="project-link"><i class="fas fa-terminal"></i> Demo</a> <!-- Changed icon -->
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card">
+                <div class="project-card medical-project"> <!-- Added medical-project class -->
                     <div class="project-image">
-                        <i class="fas fa-virus"></i>
+                        <i class="fas fa-notes-medical"></i> <!-- Changed icon -->
                     </div>
                     <div class="project-content">
                         <h3>Meta-Analysis: Vitamin D & COVID</h3>
@@ -237,17 +240,18 @@
                             <span>RevMan</span>
                             <span>Rayyan</span>
                             <span>PRISMA</span>
+                            <span class="medical-tag">Medical Research</span> <!-- Specific tag -->
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Usman0220" class="project-link"><i class="fab fa-github"></i> Research</a>
-                            <a href="#" class="project-link"><i class="fas fa-file-pdf"></i> Paper</a>
+                            <a href="#" class="project-link"><i class="fas fa-book-open"></i> Paper</a> <!-- Changed icon -->
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card">
+                <div class="project-card cyber-project"> <!-- Added cyber-project class -->
                     <div class="project-image">
-                        <i class="fas fa-search"></i>
+                        <i class="fas fa-search-location"></i> <!-- Changed icon -->
                     </div>
                     <div class="project-content">
                         <h3>URL Fuzzing App <span class="ongoing">Ongoing</span></h3>
@@ -255,18 +259,18 @@
                         <div class="project-tech">
                             <span>Python</span>
                             <span>Flask</span>
-                            <span>Web Security</span>
+                            <span class="cyber-tag">Web Security</span> <!-- Specific tag -->
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Usman0220" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-hammer"></i> In Progress</a>
+                            <a href="#" class="project-link"><i class="fas fa-cogs"></i> In Progress</a> <!-- Changed icon -->
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card">
+                <div class="project-card cyber-project"> <!-- Added cyber-project class -->
                     <div class="project-image">
-                        <i class="fab fa-android"></i>
+                        <i class="fab fa-android-alt"></i> <!-- Changed icon (assuming this is a typo for fa-android) -->
                     </div>
                     <div class="project-content">
                         <h3>Termux-Automator</h3>
@@ -275,10 +279,11 @@
                             <span>Bash</span>
                             <span>ADB</span>
                             <span>Termux</span>
+                            <span class="cyber-tag">Mobile Security</span> <!-- Specific tag -->
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Usman0220" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-download"></i> Download</a>
+                            <a href="#" class="project-link"><i class="fas fa-mobile-alt"></i> Download</a> <!-- Changed icon -->
                         </div>
                     </div>
                 </div>
@@ -291,8 +296,8 @@
         <div class="container">
             <h2 class="section-title">🏆 Achievements & Certifications</h2>
             <div class="achievements-grid">
-                <div class="achievement-category">
-                    <h3><i class="fas fa-trophy"></i> Academic Awards</h3>
+                <div class="achievement-category medical-category"> <!-- Medical Category -->
+                    <h3><i class="fas fa-trophy"></i> Medical & Academic Awards</h3>
                     <div class="achievement-list">
                         <div class="achievement-item">
                             <i class="fas fa-medal"></i>
@@ -304,15 +309,15 @@
                         <div class="achievement-item">
                             <i class="fas fa-microscope"></i>
                             <div>
-                                <h4>Multiple High-Quality Literature Reviews</h4>
-                                <p>Conducted comprehensive systematic reviews and meta-analyses</p>
+                                <h4>High-Quality Literature Reviews</h4>
+                                <p>Conducted multiple systematic reviews and meta-analyses.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="achievement-category">
-                    <h3><i class="fas fa-certificate"></i> Certifications</h3>
+                <div class="achievement-category cyber-category"> <!-- Cyber/Tech Category -->
+                    <h3><i class="fas fa-certificate"></i> Tech Certifications & Skills</h3>
                     <div class="achievement-list">
                         <div class="achievement-item">
                             <i class="fas fa-robot"></i>
@@ -321,11 +326,11 @@
                                 <p>Punjab Government Initiative</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
-                            <i class="fas fa-chart-line"></i>
+                         <div class="achievement-item">
+                            <i class="fas fa-shield-alt"></i>
                             <div>
-                                <h4>Systematic Review & Meta-Analysis</h4>
-                                <p>Cochrane & JBI Methodologies</p>
+                                <h4>Cybersecurity Essentials</h4>
+                                <p>Cisco Certified</p>
                             </div>
                         </div>
                         <div class="achievement-item">
@@ -335,31 +340,31 @@
                                 <p>Coursera & Udemy Certified</p>
                             </div>
                         </div>
-                        <div class="achievement-item">
-                            <i class="fas fa-shield-alt"></i>
+                         <div class="achievement-item">
+                            <i class="fas fa-chart-line"></i>
                             <div>
-                                <h4>Cybersecurity Essentials</h4>
-                                <p>Cisco Certified</p>
+                                <h4>Systematic Review & Meta-Analysis</h4>
+                                <p>Cochrane & JBI Methodologies</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="achievement-category">
-                    <h3><i class="fas fa-bug"></i> Security Research</h3>
+                <div class="achievement-category research-category"> <!-- Combined Research Category -->
+                    <h3><i class="fas fa-lightbulb"></i> Research & Innovation</h3>
                     <div class="achievement-list">
                         <div class="achievement-item">
-                            <i class="fas fa-search"></i>
+                            <i class="fas fa-bug"></i>
                             <div>
                                 <h4>Real-World XSS Vulnerabilities</h4>
-                                <p>Discovered and responsibly reported multiple security flaws</p>
+                                <p>Discovered and responsibly reported multiple security flaws in web applications.</p>
                             </div>
                         </div>
                         <div class="achievement-item">
-                            <i class="fas fa-code"></i>
+                            <i class="fas fa-code-branch"></i>
                             <div>
-                                <h4>AI Prototypes for Medical Applications</h4>
-                                <p>Developed innovative healthcare technology solutions</p>
+                                <h4>AI Prototypes for Healthcare</h4>
+                                <p>Developed innovative technology solutions for medical applications.</p>
                             </div>
                         </div>
                     </div>

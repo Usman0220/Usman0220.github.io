@@ -5,16 +5,39 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-dark-blue: #1a2a45; /* Deep, dark blue for professionalism and security */
+    --accent-medical-teal: #00a79d; /* Vibrant teal for medical highlights */
+    --accent-cyber-electric-blue: #00f0ff; /* Bright, electric blue for cybersecurity elements */
+    --text-light-gray: #e0e0e0; /* Off-white for text on dark backgrounds */
+    --background-light-gray: #f0f2f5; /* Light gray for body background (or contrast) */
+    --card-background: #2c3e50; /* Slightly lighter dark blue for cards */
+    --border-color: #4a6a8a; /* Border color for subtle separation */
+    --font-headings: 'Roboto', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
 body {
-    font-family: 'Inter', 'Open Sans', sans-serif;
+    font-family: var(--font-body);
     line-height: 1.7;
     margin: 0;
     padding: 0;
-    padding-top: 120px; /* Space for fixed navigation */
-    background: #f5f7fa;
-    color: #444;
+    padding-top: 140px; /* Adjusted for potentially taller fixed nav */
+    background: var(--background-light-gray); /* Light background for overall page */
+    color: #333; /* Default text color for light backgrounds */
     scroll-behavior: smooth;
 }
+
+section {
+    background-color: var(--primary-dark-blue);
+    color: var(--text-light-gray);
+    padding: 80px 0;
+}
+
+section.hero { /* Hero might have a different background or keep its gradient */
+    background: linear-gradient(135deg, var(--primary-dark-blue) 0%, #2c3e50 100%);
+}
+
 
 .container {
     max-width: 1200px;
@@ -28,62 +51,63 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    background: rgba(26, 42, 69, 0.95); /* Dark blue with transparency */
+    padding: 15px 20px; /* Slightly reduced padding */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     z-index: 9999;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-bottom: 3px solid #576cbc;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 3px solid var(--accent-cyber-electric-blue); /* Cyber accent for border */
 }
 
 .global-nav .nav-links {
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 20px; /* Reduced gap */
     flex-wrap: wrap;
 }
 
 .global-nav .nav-links a {
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: 700;
-    background: linear-gradient(145deg, #576cbc, #3a5ba0);
-    color: white;
+    padding: 12px 25px; /* Adjusted padding */
+    font-size: 17px; /* Slightly smaller font */
+    font-weight: 600; /* Adjusted font weight */
+    font-family: var(--font-headings);
+    background: transparent;
+    color: var(--text-light-gray);
+    border: 2px solid var(--accent-medical-teal); /* Medical accent for border */
     border-radius: 8px;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 12px rgba(87, 108, 188, 0.3);
     text-align: center;
-    min-width: 120px;
-    border: none;
+    min-width: 110px; /* Adjusted min-width */
     letter-spacing: 0.5px;
 }
 
 .global-nav .nav-links a:hover {
-    background: linear-gradient(145deg, #3a5ba0, #2a4a8a);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(87, 108, 188, 0.4);
+    background: var(--accent-medical-teal);
+    color: var(--primary-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 167, 157, 0.3);
 }
 
 .global-nav .nav-links a.active {
-    background: white;
-    color: #576cbc;
-    border: 2px solid #576cbc;
-    font-weight: 800;
-    box-shadow: 0 4px 10px rgba(87, 108, 188, 0.2);
+    background: var(--accent-medical-teal);
+    color: var(--primary-dark-blue);
+    font-weight: 700;
+    border-color: var(--accent-medical-teal);
+    box-shadow: 0 4px 10px rgba(0, 167, 157, 0.2);
 }
 
-/* Navigation */
+/* Navigation (Page Specific) */
 .navbar {
     position: fixed;
-    top: 80px;
+    top: 73px; /* Adjusted based on global-nav height */
     width: 100%;
-    background: rgba(255, 255, 255, 0.98);
+    background: rgba(44, 62, 80, 0.95); /* Card background color with transparency */
     backdrop-filter: blur(10px);
     z-index: 10000;
-    padding: 15px 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    padding: 12px 0;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
 
@@ -97,36 +121,34 @@ body {
 }
 
 .nav-logo a {
-    font-size: 2rem;
+    font-size: 1.8rem; /* Slightly smaller */
     font-weight: 700;
-    color: #223a5f;
+    font-family: var(--font-headings);
+    color: var(--accent-cyber-electric-blue);
     text-decoration: none;
-    background: linear-gradient(135deg, #576cbc, #3a5ba0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 25px; /* Adjusted gap */
     margin: 0;
     padding: 0;
 }
 
 .nav-link {
     text-decoration: none;
-    color: #333;
+    color: var(--text-light-gray);
     font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 8px;
+    font-family: var(--font-body);
+    padding: 8px 12px; /* Adjusted padding */
+    border-radius: 6px;
     transition: all 0.3s ease;
 }
 
-.nav-link:hover {
-    background-color: #f0f2f5;
-    color: #576cbc;
+.nav-link:hover, .nav-link.active { /* Combined active and hover for page nav */
+    background-color: var(--accent-cyber-electric-blue);
+    color: var(--primary-dark-blue);
 }
 
 .hamburger {
@@ -138,49 +160,49 @@ body {
 .bar {
     width: 25px;
     height: 3px;
-    background-color: #333;
+    background-color: var(--text-light-gray); /* Light bar for dark nav */
     margin: 3px 0;
     transition: 0.3s;
 }
 
 /* Hero Section */
+/* section.hero is already defined above for general section styling */
 .hero {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    padding: 120px 0 80px;
+    padding: 100px 0 80px; /* Adjusted padding */
     text-align: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 140px); /* Adjust based on nav heights */
     display: flex;
     align-items: center;
+    justify-content: center; /* Center content in hero */
 }
 
 .hero-container {
-    max-width: 1200px;
+    max-width: 900px; /* Slightly reduced max-width for focus */
     margin: 0 auto;
     padding: 0 20px;
 }
 
 .hero-title {
-    font-size: 4rem;
+    font-size: 3.5rem; /* Adjusted font size */
     font-weight: 700;
-    color: #223a5f;
+    font-family: var(--font-headings);
+    color: var(--accent-cyber-electric-blue); /* Cyber accent for title */
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #576cbc, #3a5ba0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    line-height: 1.2;
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
-    color: #666;
-    margin-bottom: 20px;
+    font-size: 1.4rem; /* Adjusted font size */
+    color: var(--accent-medical-teal); /* Medical accent for subtitle */
+    margin-bottom: 25px;
     font-weight: 500;
+    font-family: var(--font-body);
 }
 
 .hero-description {
-    font-size: 1.2rem;
-    color: #777;
-    margin-bottom: 30px;
+    font-size: 1.1rem; /* Adjusted font size */
+    color: var(--text-light-gray);
+    margin-bottom: 35px;
     line-height: 1.8;
 }
 
@@ -188,19 +210,36 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 12px; /* Adjusted gap */
     margin-bottom: 40px;
 }
 
 .tag {
-    background: rgba(87, 108, 188, 0.1);
-    color: #576cbc;
-    padding: 8px 16px;
+    background: rgba(0, 240, 255, 0.1); /* Cyber accent with low opacity */
+    color: var(--accent-cyber-electric-blue);
+    padding: 8px 18px; /* Adjusted padding */
     border-radius: 25px;
     font-size: 0.9rem;
     font-weight: 500;
-    border: 1px solid rgba(87, 108, 188, 0.2);
+    border: 1px solid var(--accent-cyber-electric-blue);
+    transition: all 0.3s ease;
 }
+.tag.medical {
+    background: rgba(0, 167, 157, 0.1); /* Medical accent with low opacity */
+    color: var(--accent-medical-teal);
+    border: 1px solid var(--accent-medical-teal);
+}
+
+.tag:hover {
+    transform: scale(1.05);
+    background: var(--accent-cyber-electric-blue);
+    color: var(--primary-dark-blue);
+}
+.tag.medical:hover {
+    background: var(--accent-medical-teal);
+    color: var(--primary-dark-blue);
+}
+
 
 .hero-buttons {
     display: flex;
@@ -210,270 +249,307 @@ body {
 }
 
 .btn {
-    padding: 15px 30px;
+    padding: 14px 28px; /* Adjusted padding */
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1rem; /* Adjusted font size */
+    font-family: var(--font-headings);
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
     display: inline-block;
     text-align: center;
-    min-width: 150px;
+    min-width: 160px; /* Adjusted min-width */
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #576cbc, #3a5ba0);
-    color: white;
-    box-shadow: 0 4px 15px rgba(87, 108, 188, 0.3);
+    background: var(--accent-medical-teal);
+    color: var(--primary-dark-blue);
+    box-shadow: 0 4px 15px rgba(0, 167, 157, 0.3);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(87, 108, 188, 0.4);
-    background: linear-gradient(135deg, #3a5ba0, #2a4a8a);
+    box-shadow: 0 6px 20px rgba(0, 167, 157, 0.4);
+    background: #007a70; /* Darker teal */
 }
 
 .btn-secondary {
-    background: white;
-    color: #576cbc;
-    border: 2px solid #576cbc;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    color: var(--accent-cyber-electric-blue);
+    border: 2px solid var(--accent-cyber-electric-blue);
+    box-shadow: 0 4px 15px rgba(0, 240, 255, 0.1);
 }
 
 .btn-secondary:hover {
-    background: #576cbc;
-    color: white;
+    background: var(--accent-cyber-electric-blue);
+    color: var(--primary-dark-blue);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(87, 108, 188, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 240, 255, 0.3);
 }
 
 /* Section Titles */
 .section-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem; /* Adjusted font size */
     font-weight: 700;
+    font-family: var(--font-headings);
     text-align: center;
-    margin-bottom: 50px;
-    color: #223a5f;
+    margin-bottom: 60px; /* Increased margin */
+    color: var(--accent-medical-teal); /* Medical accent for titles */
     position: relative;
+    padding-bottom: 15px; /* Add padding for the underline effect */
 }
 
 .section-title::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: 0; /* Position underline at the bottom of padding */
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
+    width: 80px; /* Increased width */
     height: 4px;
-    background: linear-gradient(135deg, #576cbc, #3a5ba0);
+    background: var(--accent-cyber-electric-blue); /* Cyber accent for underline */
     border-radius: 2px;
 }
 
 /* About Section */
-.about {
-    padding: 80px 0;
-    background: #f8fafc;
-}
+/* .about section styling inherited */
 
 .about .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    /* max-width inherited */
 }
 
 .about-content {
-    text-align: center;
+    text-align: left; /* More professional for text blocks */
 }
 
 .about-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Adjusted font size */
     line-height: 1.8;
-    color: #666;
-    margin-bottom: 50px;
+    color: var(--text-light-gray);
+    margin-bottom: 40px; /* Adjusted margin */
+}
+
+.about-text p {
+    margin-bottom: 1.5em;
 }
 
 .about-highlights {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax */
+    gap: 25px; /* Adjusted gap */
+    margin-bottom: 40px;
 }
 
 .highlight {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
-    text-align: center;
+    background: var(--card-background); /* Card background */
+    padding: 25px; /* Adjusted padding */
+    border-radius: 10px; /* Softer radius */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    text-align: left; /* Align text left */
     transition: all 0.3s ease;
+    border-left: 4px solid var(--accent-medical-teal); /* Medical accent border */
+}
+
+.highlight:nth-child(even) { /* Alternate accent for visual rhythm */
+    border-left-color: var(--accent-cyber-electric-blue);
 }
 
 .highlight:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px) scale(1.02); /* Add scale effect */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .highlight i {
-    font-size: 3rem;
-    color: #576cbc;
-    margin-bottom: 20px;
+    font-size: 2.5rem; /* Adjusted font size */
+    color: var(--accent-medical-teal);
+    margin-bottom: 15px; /* Adjusted margin */
+    display: block; /* Make icon block for better spacing */
+}
+.highlight:nth-child(even) i {
+    color: var(--accent-cyber-electric-blue);
 }
 
+
 .highlight h4 {
-    font-size: 1.3rem;
-    color: #223a5f;
-    margin-bottom: 15px;
+    font-size: 1.2rem; /* Adjusted font size */
+    font-family: var(--font-headings);
+    color: var(--text-light-gray);
+    margin-bottom: 10px; /* Adjusted margin */
 }
 
 .highlight p {
-    color: #666;
+    color: var(--text-light-gray);
+    font-size: 0.95rem; /* Adjusted font size */
     line-height: 1.6;
 }
 
 .about-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjusted minmax */
+    gap: 25px; /* Adjusted gap */
 }
 
 .stat {
     text-align: center;
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    background: var(--card-background);
+    padding: 20px; /* Adjusted padding */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .stat h3 {
-    font-size: 2.5rem;
+    font-size: 2.2rem; /* Adjusted font size */
     font-weight: 700;
-    color: #576cbc;
-    margin-bottom: 10px;
+    font-family: var(--font-headings);
+    color: var(--accent-cyber-electric-blue);
+    margin-bottom: 8px; /* Adjusted margin */
 }
 
 .stat p {
-    color: #666;
+    color: var(--text-light-gray);
     font-weight: 500;
+    font-size: 0.9rem; /* Adjusted font size */
 }
 
 /* Skills Section */
+/* .skills section styling inherited */
 .skills {
-    padding: 80px 0;
-    background: white;
+    background-color: var(--card-background); /* Different bg for skills */
 }
 
 .skills .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    /* max-width inherited */
 }
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax */
+    gap: 25px; /* Adjusted gap */
 }
 
 .skill-category {
-    background: #f8fafc;
-    padding: 30px;
-    border-radius: 15px;
-    border-left: 5px solid #576cbc;
+    background: var(--primary-dark-blue); /* Darker background for category card */
+    padding: 25px; /* Adjusted padding */
+    border-radius: 10px;
+    border-left: 5px solid var(--accent-medical-teal); /* Medical accent */
+}
+.skill-category.cyber-category {
+    border-left: 5px solid var(--accent-cyber-electric-blue); /* Cyber accent */
 }
 
+
 .skill-category h3 {
-    color: #223a5f;
+    color: var(--text-light-gray);
+    font-family: var(--font-headings);
     margin-bottom: 20px;
-    font-size: 1.3rem;
+    font-size: 1.2rem; /* Adjusted font size */
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.skill-category i {
-    color: #576cbc;
-    font-size: 1.5rem;
+.skill-category i { /* Icon color should match border */
+    color: var(--accent-medical-teal);
+    font-size: 1.4rem; /* Adjusted font size */
 }
+.skill-category.cyber-category i {
+    color: var(--accent-cyber-electric-blue);
+}
+
 
 .skill-items {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 10px; /* Adjusted gap */
 }
 
 .skill-item {
-    background: white;
-    color: #576cbc;
-    padding: 8px 16px;
+    background: var(--card-background); /* Match card background */
+    color: var(--accent-medical-teal);
+    padding: 8px 15px; /* Adjusted padding */
     border-radius: 20px;
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Adjusted font size */
     font-weight: 500;
-    border: 1px solid rgba(87, 108, 188, 0.2);
+    border: 1px solid var(--accent-medical-teal);
     transition: all 0.3s ease;
 }
+.skill-category.cyber-category .skill-item {
+    color: var(--accent-cyber-electric-blue);
+    border: 1px solid var(--accent-cyber-electric-blue);
+}
+
 
 .skill-item:hover {
-    background: #576cbc;
-    color: white;
+    background: var(--accent-medical-teal);
+    color: var(--primary-dark-blue);
     transform: scale(1.05);
 }
-
-/* Projects Section */
-.projects {
-    padding: 80px 0;
-    background: #f8fafc;
+.skill-category.cyber-category .skill-item:hover {
+    background: var(--accent-cyber-electric-blue);
 }
 
+
+/* Projects Section */
+/* .projects section styling inherited */
+
 .projects .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    /* max-width inherited */
 }
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted minmax */
+    gap: 30px; /* Adjusted gap */
 }
 
 .project-card {
-    background: white;
-    border-radius: 15px;
+    background: var(--card-background);
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border-color); /* Use defined border color */
+    display: flex; /* Use flex for better content control */
+    flex-direction: column; /* Stack content vertically */
 }
 
 .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px) scale(1.03); /* Add scale */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 .project-card.featured {
-    border: 2px solid #576cbc;
+    border: 2px solid var(--accent-medical-teal); /* Medical accent for featured */
     position: relative;
+}
+.project-card.featured.cyber-featured {
+    border: 2px solid var(--accent-cyber-electric-blue); /* Cyber accent for featured */
 }
 
 .project-card.featured::before {
-    content: '✨ Featured';
+    content: '✨ Featured Medical';
     position: absolute;
     top: 15px;
-    right: 15px;
-    background: #576cbc;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
+    right: -1px; /* Adjust to align with border */
+    background: var(--accent-medical-teal);
+    color: var(--primary-dark-blue);
+    padding: 6px 12px; /* Adjusted padding */
+    border-radius: 0 0 0 10px; /* Style corner */
     font-size: 0.8rem;
     font-weight: 600;
     z-index: 2;
 }
+.project-card.featured.cyber-featured::before {
+    content: '✨ Featured Cyber';
+    background: var(--accent-cyber-electric-blue);
+}
 
-.project-image {
-    height: 120px;
-    background: linear-gradient(135deg, #576cbc, #3a5ba0);
+
+.project-image { /* This could be an actual <img> tag container if images are used */
+    height: 100px; /* Reduced height */
+    background: linear-gradient(135deg, var(--primary-dark-blue), #3e5670 ); /* Darker gradient */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -481,222 +557,273 @@ body {
 }
 
 .project-image i {
-    font-size: 3rem;
-    color: white;
+    font-size: 2.5rem; /* Adjusted font size */
+    color: var(--accent-cyber-electric-blue); /* Default to cyber icon color */
+}
+.project-card.medical-project .project-image i { /* Specific class for medical project icons */
+    color: var(--accent-medical-teal);
 }
 
+
 .project-content {
-    padding: 25px;
+    padding: 20px; /* Adjusted padding */
+    flex-grow: 1; /* Allow content to fill space */
+    display: flex;
+    flex-direction: column;
 }
 
 .project-content h3 {
-    font-size: 1.4rem;
-    color: #223a5f;
-    margin-bottom: 15px;
+    font-size: 1.3rem; /* Adjusted font size */
+    font-family: var(--font-headings);
+    color: var(--text-light-gray);
+    margin-bottom: 12px; /* Adjusted margin */
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
 .ongoing {
-    background: #fbbf24;
+    background: #e67e22; /* Orange for ongoing */
     color: white;
-    padding: 3px 8px;
+    padding: 3px 10px; /* Adjusted padding */
     border-radius: 12px;
-    font-size: 0.7rem;
+    font-size: 0.75rem; /* Adjusted font size */
     font-weight: 600;
 }
 
 .project-content p {
-    color: #666;
+    color: var(--text-light-gray);
     line-height: 1.6;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Adjusted margin */
+    font-size: 0.9rem; /* Adjusted font size */
+    flex-grow: 1; /* Allow paragraph to take available space */
 }
 
 .project-tech {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Keep margin */
 }
 
 .project-tech span {
-    background: #e2e8f0;
-    color: #576cbc;
+    background: var(--primary-dark-blue); /* Darker background for tech tags */
+    color: var(--accent-cyber-electric-blue);
     padding: 5px 12px;
     border-radius: 15px;
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* Adjusted font size */
     font-weight: 500;
+    border: 1px solid var(--accent-cyber-electric-blue);
 }
+.project-card.medical-project .project-tech span { /* Tech tags for medical projects */
+    color: var(--accent-medical-teal);
+    border: 1px solid var(--accent-medical-teal);
+}
+
 
 .project-links {
     display: flex;
     gap: 15px;
+    margin-top: auto; /* Push links to the bottom */
 }
 
 .project-link {
-    color: #576cbc;
+    color: var(--accent-cyber-electric-blue);
     text-decoration: none;
     font-weight: 500;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px; /* Adjusted gap */
     transition: all 0.3s ease;
+}
+.project-card.medical-project .project-link {
+    color: var(--accent-medical-teal);
 }
 
 .project-link:hover {
-    color: #3a5ba0;
-    transform: translateX(3px);
+    color: #8effff; /* Lighter electric blue */
+    transform: translateX(2px); /* Subtle movement */
+}
+.project-card.medical-project .project-link:hover {
+    color: #59fff3; /* Lighter teal */
 }
 
+
 /* Achievements Section */
+/* .achievements section styling inherited */
 .achievements {
-    padding: 80px 0;
-    background: white;
+    background-color: var(--card-background); /* Match skills bg */
 }
 
 .achievements .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    /* max-width inherited */
 }
 
 .achievements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted minmax */
+    gap: 30px; /* Adjusted gap */
 }
 
 .achievement-category {
-    background: #f8fafc;
-    padding: 30px;
-    border-radius: 15px;
-    border-top: 5px solid #576cbc;
+    background: var(--primary-dark-blue);
+    padding: 25px; /* Adjusted padding */
+    border-radius: 10px;
+    border-top: 4px solid var(--accent-medical-teal); /* Medical accent */
+}
+.achievement-category.cyber-category {
+    border-top-color: var(--accent-cyber-electric-blue); /* Cyber accent for specific categories */
 }
 
+
 .achievement-category h3 {
-    color: #223a5f;
-    margin-bottom: 25px;
-    font-size: 1.3rem;
+    color: var(--text-light-gray);
+    font-family: var(--font-headings);
+    margin-bottom: 20px; /* Adjusted margin */
+    font-size: 1.2rem; /* Adjusted font size */
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.achievement-category i {
-    color: #576cbc;
-    font-size: 1.5rem;
+.achievement-category i { /* Icon color match border */
+    color: var(--accent-medical-teal);
+    font-size: 1.4rem; /* Adjusted font size */
+}
+.achievement-category.cyber-category i {
+    color: var(--accent-cyber-electric-blue);
 }
 
 .achievement-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px; /* Adjusted gap */
 }
 
 .achievement-item {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
+    background: var(--card-background);
+    padding: 18px; /* Adjusted padding */
+    border-radius: 8px; /* Softer radius */
     display: flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    border-left: 3px solid var(--accent-medical-teal);
+}
+.achievement-category.cyber-category .achievement-item {
+    border-left-color: var(--accent-cyber-electric-blue);
 }
 
 .achievement-item:hover {
-    transform: translateX(5px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transform: translateX(5px) scale(1.02); /* Add scale */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-.achievement-item i {
-    font-size: 2rem;
-    color: #576cbc;
-    min-width: 40px;
+.achievement-item i { /* Icon color match item's border */
+    font-size: 1.8rem; /* Adjusted font size */
+    color: var(--accent-medical-teal);
+    min-width: 35px; /* Adjusted min-width */
+}
+.achievement-category.cyber-category .achievement-item i {
+    color: var(--accent-cyber-electric-blue);
 }
 
 .achievement-item h4 {
-    color: #223a5f;
+    color: var(--text-light-gray);
+    font-family: var(--font-body); /* Body font for consistency */
     margin-bottom: 5px;
-    font-size: 1.1rem;
+    font-size: 1rem; /* Adjusted font size */
+    font-weight: 600;
 }
 
 .achievement-item p {
-    color: #666;
-    font-size: 0.9rem;
+    color: var(--text-light-gray);
+    font-size: 0.85rem; /* Adjusted font size */
+    opacity: 0.8; /* Slightly muted detail text */
 }
 
 /* Contact Section */
+/* .contact section styling inherited, can keep gradient or use primary-dark-blue */
 .contact {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+     background: linear-gradient(135deg, var(--primary-dark-blue) 0%, #2c3e50 100%);
 }
 
 .contact .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    /* max-width inherited */
 }
 
 .contact-description {
     text-align: center;
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 50px;
+    font-size: 1.1rem; /* Adjusted font size */
+    color: var(--text-light-gray);
+    margin-bottom: 40px; /* Adjusted margin */
+    max-width: 700px; /* Constrain width */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contact-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    grid-template-columns: 1fr 1.2fr; /* Give form a bit more space */
+    gap: 40px; /* Adjusted gap */
     align-items: start;
 }
 
 .contact-info {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px; /* Adjusted gap */
 }
 
 .contact-item {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
+    background: var(--card-background);
+    padding: 20px; /* Adjusted padding */
+    border-radius: 10px;
     display: flex;
     align-items: center;
-    gap: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    gap: 18px; /* Adjusted gap */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
+    border-left: 3px solid var(--accent-medical-teal);
 }
 
 .contact-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px) scale(1.01); /* Subtle hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .contact-item i {
-    font-size: 2rem;
-    color: #576cbc;
-    min-width: 50px;
+    font-size: 1.8rem; /* Adjusted font size */
+    color: var(--accent-medical-teal);
+    min-width: 40px; /* Adjusted min-width */
 }
 
 .contact-item h4 {
-    color: #223a5f;
+    color: var(--text-light-gray);
+    font-family: var(--font-headings);
     margin-bottom: 5px;
-    font-size: 1.1rem;
+    font-size: 1.05rem; /* Adjusted font size */
 }
 
-.contact-item p {
-    color: #666;
-    font-size: 0.95rem;
+.contact-item p, .contact-item p a {
+    color: var(--text-light-gray);
+    font-size: 0.9rem; /* Adjusted font size */
+    opacity: 0.9;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
+.contact-item p a:hover {
+    color: var(--accent-medical-teal);
+}
+
 
 .contact-form {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    background: var(--card-background);
+    padding: 30px; /* Keep padding */
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 }
 
 .form-group {
@@ -707,29 +834,40 @@ body {
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 15px;
-    border: 2px solid #e2e8f0;
+    padding: 14px; /* Adjusted padding */
+    border: 2px solid var(--border-color);
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.95rem; /* Adjusted font size */
+    font-family: var(--font-body);
     transition: all 0.3s ease;
-    background: #f8fafc;
+    background: var(--primary-dark-blue); /* Darker input background */
+    color: var(--text-light-gray);
     box-sizing: border-box;
 }
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(224, 224, 224, 0.6); /* Lighter placeholder */
+}
+
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #576cbc;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(87, 108, 188, 0.1);
+    border-color: var(--accent-cyber-electric-blue); /* Cyber accent for focus */
+    background: #25354a; /* Slightly lighter dark on focus */
+    box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.2); /* Cyber focus glow */
 }
+.form-group select {
+    appearance: none; /* Custom select arrow might be needed */
+}
+
 
 /* Footer */
 .footer {
-    background: #223a5f;
-    color: white;
-    padding: 40px 0;
+    background: #111928; /* Even darker footer */
+    color: var(--text-light-gray);
+    padding: 35px 0; /* Adjusted padding */
     text-align: center;
 }
 
@@ -743,48 +881,133 @@ body {
     margin: 0 auto;
     padding: 0 20px;
 }
+.footer p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
 
 .social-links {
     display: flex;
-    gap: 20px;
+    gap: 18px; /* Adjusted gap */
 }
 
 .social-links a {
-    color: white;
-    font-size: 1.5rem;
+    color: var(--text-light-gray);
+    font-size: 1.4rem; /* Adjusted font size */
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
 .social-links a:hover {
-    color: #576cbc;
-    transform: translateY(-3px);
+    color: var(--accent-cyber-electric-blue); /* Cyber accent on hover */
+    transform: translateY(-3px) scale(1.1); /* Add scale */
 }
 
 /* Responsive Design */
+@media (max-width: 992px) { /* Tablet and larger mobile */
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+    .navbar {
+        top: 73px; /* Ensure this aligns if global nav changes height */
+    }
+     body {
+        padding-top: 130px; /* Adjust if global nav height changes */
+    }
+}
+
+
 @media (max-width: 768px) {
     body {
-        padding-top: 320px;
+        padding-top: 180px; /* Increased padding top for stacked navs */
     }
-    
+    .global-nav {
+        padding: 10px 15px;
+    }
     .global-nav .nav-links {
-        flex-direction: column;
-        align-items: center;
+        gap: 10px;
+        justify-content: space-around; /* Better use of space */
     }
-    
     .global-nav .nav-links a {
-        width: 90%;
-        margin: 5px 0;
+        padding: 10px 15px;
+        font-size: 14px;
+        min-width: auto; /* Allow buttons to shrink */
+    }
+    .navbar {
+        top: 0; /* Stack on top when hamburger is active */
+        padding: 10px 0;
+        background: var(--primary-dark-blue); /* Solid background when mobile menu might be open */
+    }
+     .navbar.fixed-nav-adjust { /* Class to be added by JS when global nav is tall */
+        top: 120px; /* Example: adjust if global nav becomes very tall on mobile */
+    }
+
+    .nav-container {
+        padding: 0 15px;
+    }
+    .nav-menu {
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Position below navbar */
+        left: 0;
+        width: 100%;
+        background: var(--primary-dark-blue);
+        padding: 10px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        border-top: 1px solid var(--border-color);
+    }
+    .nav-menu.active {
+        display: flex; /* Show when active */
+    }
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+    }
+    .nav-link {
         padding: 12px 20px;
+        display: block; /* Make links full width */
+        width: 100%;
+        border-radius: 0;
     }
-    
+    .nav-link:hover, .nav-link.active {
+        background-color: var(--accent-cyber-electric-blue);
+        color: var(--primary-dark-blue);
+    }
+    .hamburger {
+        display: flex; /* Show hamburger */
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
-    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+    }
+    .btn {
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .about-highlights, .about-stats, .skills-grid, .projects-grid, .achievements-grid {
+        grid-template-columns: 1fr; /* Single column for most grids */
     }
     
     .contact-content {
@@ -795,88 +1018,141 @@ body {
     .footer .container {
         flex-direction: column;
         text-align: center;
-    }
-    
-    .nav-menu {
-        display: none;
-    }
-    
-    .hamburger {
-        display: flex;
+        gap: 15px;
     }
 }
 
 @media (max-width: 480px) {
     body {
-        padding-top: 340px;
+        padding-top: 160px; /* Adjust as needed for smaller screens */
     }
-    
-    .global-nav {
-        padding: 15px 10px;
+    .global-nav .nav-links a {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+     .navbar.fixed-nav-adjust {
+        top: 100px; /* Example adjustment */
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    .hero-description {
+        font-size: 1rem;
+    }
+    .tag {
+        padding: 6px 12px;
+        font-size: 0.8rem;
     }
 }
 
-/* Mnemonic specific styles (for compatibility) */
+/* Mnemonic specific styles (for compatibility, with new theme colors) */
 .mnemonic-category h2 {
-    font-size: 2rem;
-    color: #333;
-    border-bottom: 3px solid #576cbc;
+    font-size: 1.8rem; /* Adjusted */
+    font-family: var(--font-headings);
+    color: var(--accent-medical-teal);
+    border-bottom: 3px solid var(--accent-cyber-electric-blue);
     padding-bottom: 0.6rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Adjusted */
 }
 
 .mnemonic-card {
-    background: #fdfdfd;
-    border: 1px solid #e5e5e5;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
-    padding: 1.8rem;
-    margin-bottom: 1.8rem;
+    padding: 1.5rem; /* Adjusted */
+    margin-bottom: 1.5rem;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .mnemonic-card:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
     transform: translateY(-5px);
 }
 
 .mnemonic-phrase {
-    font-size: 1.3rem;
+    font-size: 1.2rem; /* Adjusted */
     font-style: italic;
-    color: #555;
-    margin-bottom: 1.2rem;
+    color: var(--text-light-gray);
+    margin-bottom: 1rem; /* Adjusted */
 }
 
 .mnemonic-answer {
     display: none;
-    margin-top: 1.2rem;
-    padding: 1.2rem;
-    background: #e9f5ff;
-    border-left: 4px solid #576cbc;
+    margin-top: 1rem; /* Adjusted */
+    padding: 1rem; /* Adjusted */
+    background: var(--primary-dark-blue); /* Darker answer background */
+    border-left: 4px solid var(--accent-medical-teal);
     border-radius: 4px;
+    color: var(--text-light-gray);
 }
 
 .mnemonic-answer p {
     margin: 0;
+    font-size: 0.95rem; /* Adjusted */
 }
 
 .mnemonic-answer img {
     max-width: 100%;
     height: auto;
-    margin-top: 1rem;
+    margin-top: 0.8rem; /* Adjusted */
     border-radius: 4px;
+    border: 1px solid var(--border-color);
 }
 
 .toggle-answer {
-    background-color: #576cbc;
-    color: white;
+    background-color: var(--accent-medical-teal);
+    color: var(--primary-dark-blue);
     border: none;
-    padding: 0.7rem 1.4rem;
+    padding: 0.6rem 1.2rem; /* Adjusted */
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Adjusted */
+    font-family: var(--font-headings);
     transition: background-color 0.3s ease;
 }
 
 .toggle-answer:hover {
-    background-color: #3a5ba0;
+    background-color: #007a70; /* Darker teal */
+}
+
+/* Ensure body padding accounts for both navs. This might need JS adjustment if global nav height is dynamic on mobile. */
+/* Initial padding-top set in body style should be sum of both navs' resting heights. */
+/* If hamburger menu pushes content, ensure layout handles it. */
+/* The current CSS assumes .navbar is fixed below .global-nav. */
+/* Mobile: .navbar becomes the primary visible fixed nav when its menu is open, .global-nav might be simpler or also adapt. */
+/* The provided CSS for mobile stacks .navbar at top:0 when hamburger is active, this might need review with the global-nav presence. */
+/* Let's assume for mobile, global-nav becomes simpler / shorter, and main page nav (.navbar) is the one with hamburger. */
+
+/* Adjust padding-top on body if global-nav height changes significantly on mobile */
+@media (max-width: 768px) {
+    body {
+        /* Estimate combined height of global-nav and collapsed navbar */
+        /* Example: global-nav (50px) + navbar (50px) = 100px. Add some buffer. */
+        /* This is tricky without knowing exact mobile global-nav height. */
+        /* For now, the 180px might be too much if global-nav shrinks. */
+        /* Let's assume global-nav is around 60px, and navbar (collapsed) is 60px on mobile */
+        padding-top: 130px; /* More conservative padding for mobile */
+    }
+
+    .navbar {
+         /* If global-nav is present and fixed, navbar must be positioned below it */
+        top: 60px; /* Assuming global-nav is roughly 60px tall on mobile */
+    }
+
+    .nav-menu.active {
+        /* When menu is active, it should appear below the .navbar itself */
+        top: 100%; /* This should be relative to .navbar's position */
+    }
+}
+@media (max-width: 480px) {
+    body {
+        padding-top: 120px; /* Further refinement for small screens */
+    }
+     .navbar {
+        top: 50px; /* Assuming global-nav is shorter */
+    }
 }
