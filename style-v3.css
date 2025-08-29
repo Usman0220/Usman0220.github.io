@@ -711,21 +711,6 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    body {
-        padding-top: 320px;
-    }
-    
-    .global-nav .nav-links {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .global-nav .nav-links a {
-        width: 90%;
-        margin: 5px 0;
-        padding: 12px 20px;
-    }
-    
     .hero-title {
         font-size: 2.5rem;
     }
@@ -747,6 +732,24 @@ body {
     
     .nav-menu {
         display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background: white;
+        padding: 1rem 0;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-link {
+        text-align: center;
+        padding: 1rem;
+        width: 100%;
     }
     
     .hamburger {
@@ -755,13 +758,7 @@ body {
 }
 
 @media (max-width: 480px) {
-    body {
-        padding-top: 340px;
-    }
-    
-    .global-nav {
-        padding: 15px 10px;
-    }
+
 }
 
 /* Mnemonic specific styles (for compatibility) */
