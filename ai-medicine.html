@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI in Medicine | Muhammad Usman</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #4a5d23; --accent: #6b8e23; --bg: #0a0d05; --text: #d4dbc7; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; overflow: hidden; }
+        .nav-back { position: fixed; top: 20px; left: 20px; color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; z-index: 100; }
+        .canvas-container { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
+        .content { position: relative; z-index: 10; padding: 100px 50px; max-width: 800px; }
+        h1 { font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
+        .terminal { background: rgba(0,0,0,0.8); padding: 20px; border-left: 4px solid var(--primary); font-family: 'JetBrains Mono'; font-size: 0.9rem; line-height: 1.5; }
+        .status-pulse { display: inline-block; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; margin-right: 10px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-back">< [RETURN_TO_CORE]</a>
+    <canvas id="neural-net" class="canvas-container"></canvas>
+    <div class="content">
+        <h1>AI Diagnostics</h1>
+        <div class="terminal">
+            <p><span class="status-pulse"></span>Initializing Medical AI Pipeline...</p>
+            <p>> Loading Python/OpenCV kernels...</p>
+            <p>> Analyzing DICOM datasets: [SUCCESS]</p>
+            <p>> Learning diagnostic patterns for medical imaging.</p>
+            <p style="color: var(--accent); margin-top: 20px;">"Bridging clinical intuition with computational precision."</p>
+        </div>
+    </div>
+    <script>
+        const canvas = document.getElementById('neural-net');
+        const ctx = canvas.getContext('2d');
+        let nodes = [];
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 1;
+                this.vy = (Math.random() - 0.5) * 1;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+        }
+
+        for(let i=0; i<80; i++) nodes.push(new Node());
+
+        function draw() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            ctx.strokeStyle = 'rgba(107, 142, 35, 0.2)';
+            ctx.fillStyle = '#6b8e23';
+            nodes.forEach((n, i) => {
+                n.update();
+                ctx.beginPath(); ctx.arc(n.x, n.y, 2, 0, Math.PI*2); ctx.fill();
+                nodes.slice(i+1).forEach(m => {
+                    let d = Math.hypot(n.x-m.x, n.y-m.y);
+                    if(d < 150) {
+                        ctx.lineWidth = (150-d)/50;
+                        ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y); ctx.stroke();
+                    }
+                });
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
+</html>

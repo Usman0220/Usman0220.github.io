@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Health Tech | Muhammad Usman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background: #fcfdfa; color: #2f3e1b; font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; }
+        .nav-back { position: fixed; top: 20px; left: 20px; color: #556b2f; text-decoration: none; font-weight: 600; }
+        .sidebar { width: 300px; background: #556b2f; color: white; padding: 50px; }
+        .main { flex: 1; padding: 100px; position: relative; }
+        .dashboard-rect { border: 2px solid #556b2f; padding: 40px; border-radius: 20px; position: relative; overflow: hidden; }
+        .pulse-line { width: 100%; height: 100px; stroke: #6b8e23; fill: none; stroke-width: 2; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-back">← HOME</a>
+    <div class="sidebar">
+        <h2>Future Solutions</h2>
+        <p>Integrating diagnostic AI with clinical workflows to create seamless patient journeys.</p>
+    </div>
+    <div class="main">
+        <h1>Health Dashboard v1</h1>
+        <div class="dashboard-rect">
+            <svg class="pulse-line" viewBox="0 0 1000 100">
+                <polyline id="path" points="0,50 100,50 110,20 120,80 130,50 200,50 300,50 310,10 320,90 330,50 400,50 500,50 510,30 520,70 530,50 600,50 1000,50"></polyline>
+            </svg>
+            <p>System Status: <strong>OPERATIONAL</strong></p>
+            <p>AI Diagnostics: <strong>ONLINE</strong></p>
+            <p>Data Encryption: <strong>SECURED</strong></p>
+        </div>
+    </div>
+    <script>
+        const path = document.getElementById('path');
+        let offset = 0;
+        function animate() {
+            offset -= 2;
+            path.style.transform = `translateX(${offset}px)`;
+            if(Math.abs(offset) > 400) offset = 0;
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>

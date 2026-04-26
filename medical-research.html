@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Research | Muhammad Usman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #556b2f; --bg: #fdfdfa; --text: #2f3e1b; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 50px; }
+        .nav-back { display: inline-block; margin-bottom: 40px; color: var(--primary); text-decoration: none; font-weight: 600; }
+        .research-stream { max-width: 900px; }
+        .paper-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; border-left: 5px solid var(--primary); opacity: 0; transform: translateX(-20px); transition: 0.5s; }
+        .paper-card.show { opacity: 1; transform: translateX(0); }
+        h1 { color: var(--primary); font-size: 2.5rem; }
+        .stat-bar { height: 4px; background: #eee; border-radius: 2px; margin: 10px 0; overflow: hidden; }
+        .stat-fill { height: 100%; background: var(--primary); width: 0; transition: 2s; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-back">← BACK TO OVERVIEW</a>
+    <div class="research-stream">
+        <h1>Evidence Synthesis</h1>
+        <p>Exploring systematic reviews and meta-analysis to bridge clinical data gaps.</p>
+        
+        <div class="paper-card">
+            <h3>Systematic Review Methodology</h3>
+            <p>Developing rigorous protocols for medical evidence extraction.</p>
+            <div class="stat-bar"><div class="stat-fill" style="width: 85%;"></div></div>
+            <small>Data Accuracy: 85%</small>
+        </div>
+
+        <div class="paper-card">
+            <h3>Meta-Analysis Visualization</h3>
+            <p>Integrating complex datasets to find clinical significance.</p>
+            <div class="stat-bar"><div class="stat-fill" style="width: 70%;"></div></div>
+            <small>Inference Depth: 70%</small>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.paper-card').forEach((card, i) => {
+            setTimeout(() => card.classList.add('show'), i * 300);
+        });
+    </script>
+</body>
+</html>

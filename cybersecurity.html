@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cybersecurity | Muhammad Usman</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { background: #000; color: #6b8e23; font-family: 'JetBrains Mono', monospace; padding: 40px; margin: 0; overflow: hidden; }
+        .nav-back { color: #808000; text-decoration: none; position: fixed; top: 20px; left: 20px; }
+        .terminal { border: 1px solid #2f3e1b; padding: 30px; height: 80vh; overflow: hidden; position: relative; }
+        .scanline { position: absolute; width: 100%; height: 2px; background: rgba(107, 142, 35, 0.1); top: 0; animation: scan 4s linear infinite; }
+        @keyframes scan { from { top: 0; } to { top: 100%; } }
+        .log-entry { margin-bottom: 5px; opacity: 0; animation: fadeIn 0.1s forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-back">[EXIT_SECURE_VAULT]</a>
+    <div class="terminal" id="log">
+        <div class="scanline"></div>
+        <p>--- INITIALIZING DATA PROTECTION PROTOCOLS ---</p>
+    </div>
+    <script>
+        const log = document.getElementById('log');
+        const commands = [
+            "SCANNING_PII_DATA_STREAMS...",
+            "ENCRYPTING_HEALTH_RECORDS_AES256...",
+            "VULNERABILITY_ASSESSMENT: RUNNING",
+            "THREAT_DETECTED: NONE",
+            "SECURE_LAYER: ACTIVE",
+            "AUDITING_DIGITAL_HEALTH_INFRASTRUCTURE...",
+            "SYSTEM_INTEGRITY_CHECK: 100%"
+        ];
+        function addLog() {
+            const p = document.createElement('p');
+            p.className = 'log-entry';
+            p.innerText = `[${new Date().toLocaleTimeString()}] ${commands[Math.floor(Math.random()*commands.length)]}`;
+            log.appendChild(p);
+            if(log.childNodes.length > 25) log.removeChild(log.childNodes[1]);
+            setTimeout(addLog, Math.random() * 1000 + 500);
+        }
+        addLog();
+    </script>
+</body>
+</html>
