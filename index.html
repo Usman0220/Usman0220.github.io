@@ -19,7 +19,7 @@
             --text-muted: #8a967d;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; cursor: none; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -30,18 +30,16 @@
             line-height: 1.6;
         }
 
-        /* --- Advanced Background & Cursor --- */
-        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.4; }
-        
-        #cursor-dot {
-            width: 8px; height: 8px; background: var(--accent-green);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 10000; transition: transform 0.1s;
-        }
-        #cursor-outline {
-            width: 40px; height: 40px; border: 1px solid var(--accent-green);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 9999; transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        /* --- Spotlight Effect --- */
+        #spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(600px circle at var(--x) var(--y), rgba(107, 142, 35, 0.15), transparent 80%);
+            z-index: 1;
         }
 
         /* --- Layout Structures --- */
@@ -306,6 +304,14 @@
         // Initialization
         initCanvas();
         window.addEventListener('resize', initCanvas);
+        for (let i = 0; i < 100; i++) particles.push(new Particle());
+        animate();
+        setInterval(addDiagItem, 2000);
+        setInterval(updateUptime, 1000);
+    </script>
+</body>
+</html>
+window.addEventListener('resize', initCanvas);
         for (let i = 0; i < 100; i++) particles.push(new Particle());
         animate();
         setInterval(addDiagItem, 2000);
