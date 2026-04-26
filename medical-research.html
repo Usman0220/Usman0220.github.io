@@ -2,44 +2,327 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Medical Research | Muhammad Usman</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Synthesis Lab | Muhammad Usman</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #556b2f; --bg: #fdfdfa; --text: #2f3e1b; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 50px; }
-        .nav-back { display: inline-block; margin-bottom: 40px; color: var(--primary); text-decoration: none; font-weight: 600; }
-        .research-stream { max-width: 900px; }
-        .paper-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; border-left: 5px solid var(--primary); opacity: 0; transform: translateX(-20px); transition: 0.5s; }
-        .paper-card.show { opacity: 1; transform: translateX(0); }
-        h1 { color: var(--primary); font-size: 2.5rem; }
-        .stat-bar { height: 4px; background: #eee; border-radius: 2px; margin: 10px 0; overflow: hidden; }
-        .stat-fill { height: 100%; background: var(--primary); width: 0; transition: 2s; }
+        :root {
+            --primary-green: #4a5d23;
+            --accent-green: #6b8e23;
+            --deep-bg: #080a04;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e7d8;
+            --text-muted: #8a967d;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--deep-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        #graph-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .layout-container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+        }
+
+        .nav-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+            color: var(--accent-green);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            padding: 10px 20px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .nav-back:hover {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        /* --- Research Dashboard --- */
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .header-section h1 {
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .glitch-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .metric-box {
+            padding: 25px;
+            border-left: 4px solid var(--primary-green);
+            background: rgba(255,255,255,0.01);
+        }
+
+        .metric-box h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+        }
+
+        .counter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        /* --- Interactive Meta-Analysis Viz --- */
+        .forest-plot {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+
+        .plot-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        .study-label { width: 150px; color: var(--text-muted); }
+        .bar-container { flex: 1; height: 1px; background: #333; position: relative; margin: 0 20px; }
+        .diamond {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-green);
+            transform: translateY(-50%) rotate(45deg);
+            top: 50%;
+        }
+
+        /* --- Sidebar Feed --- */
+        .sidebar-feed {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+        }
+
+        .feed-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--glass-border);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (max-width: 900px) {
+            .layout-container { grid-template-columns: 1fr; }
+            .header-section h1 { font-size: 2rem; }
+        }
     </style>
 </head>
 <body>
-    <a href="index.html" class="nav-back">← BACK TO OVERVIEW</a>
-    <div class="research-stream">
-        <h1>Evidence Synthesis</h1>
-        <p>Exploring systematic reviews and meta-analysis to bridge clinical data gaps.</p>
-        
-        <div class="paper-card">
-            <h3>Systematic Review Methodology</h3>
-            <p>Developing rigorous protocols for medical evidence extraction.</p>
-            <div class="stat-bar"><div class="stat-fill" style="width: 85%;"></div></div>
-            <small>Data Accuracy: 85%</small>
-        </div>
 
-        <div class="paper-card">
-            <h3>Meta-Analysis Visualization</h3>
-            <p>Integrating complex datasets to find clinical significance.</p>
-            <div class="stat-bar"><div class="stat-fill" style="width: 70%;"></div></div>
-            <small>Inference Depth: 70%</small>
-        </div>
+    <canvas id="graph-canvas"></canvas>
+    <a href="index.html" class="nav-back">< RETURN_TO_CORE</a>
+
+    <div class="layout-container">
+        <main>
+            <section class="glass-card header-section">
+                <span class="glitch-tag">Module: Evidence_Synthesis_v4</span>
+                <h1>Research & Meta-Analysis</h1>
+                <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 800px;">
+                    Quantifying clinical certainty through rigorous systematic review protocols and computational meta-analytic synthesis.
+                </p>
+
+                <div class="meta-grid">
+                    <div class="metric-box">
+                        <h3>PAPERS_PARSED</h3>
+                        <span class="counter" id="paper-count">0</span>
+                    </div>
+                    <div class="metric-box">
+                        <h3>BIAS_COEFFICIENT</h3>
+                        <span class="counter" id="bias-val">0.00</span>
+                    </div>
+                    <div class="metric-box">
+                        <h3>CONFIDENCE_LVL</h3>
+                        <span class="counter" id="conf-lvl">0</span>%
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass-card">
+                <div class="glitch-tag">// META_ANALYTIC_VISUALIZATION</div>
+                <div class="forest-plot" id="forest-plot">
+                    <!-- Plot rows generated by JS -->
+                </div>
+                <p style="margin-top: 20px; font-size: 0.85rem; color: var(--text-muted);">
+                    Figure 1: Heterogeneity analysis of clinical outcomes across multi-center trials.
+                </p>
+            </section>
+        </main>
+
+        <aside>
+            <div class="glass-card sidebar-feed">
+                <div class="glitch-tag" style="margin-bottom: 20px;">LIVE_SYNTHESIS_LOG</div>
+                <div id="log-container">
+                    <!-- Log entries generated by JS -->
+                </div>
+            </div>
+        </aside>
     </div>
+
     <script>
-        document.querySelectorAll('.paper-card').forEach((card, i) => {
-            setTimeout(() => card.classList.add('show'), i * 300);
-        });
+        // 1. Interactive Citation Network
+        const canvas = document.getElementById('graph-canvas');
+        const ctx = canvas.getContext('2d');
+        let nodes = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class ResearchNode {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(107, 142, 35, 0.4)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+
+        function animateGraph() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            nodes.forEach((n, i) => {
+                n.update(); n.draw();
+                nodes.slice(i + 1).forEach(m => {
+                    const d = Math.hypot(n.x - m.x, n.y - m.y);
+                    if (d < 150) {
+                        ctx.strokeStyle = `rgba(107, 142, 35, ${0.1 * (1 - d/150)})`;
+                        ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y); ctx.stroke();
+                    }
+                });
+            });
+            requestAnimationFrame(animateGraph);
+        }
+
+        // 2. Data Counters
+        function animateValue(id, start, end, duration, decimals = 0) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const val = (progress * (end - start) + start).toFixed(decimals);
+                document.getElementById(id).innerHTML = val;
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // 3. Forest Plot Generation
+        const studies = ["Usman et al.", "Lancet_2024", "JAMA_Meta", "NEJM_Clin", "BMJ_Open"];
+        function generatePlot() {
+            const plot = document.getElementById('forest-plot');
+            studies.forEach((s, i) => {
+                const row = document.createElement('div');
+                row.className = 'plot-row';
+                const pos = 30 + Math.random() * 40;
+                row.innerHTML = `
+                    <div class="study-label">${s}</div>
+                    <div class="bar-container">
+                        <div class="diamond" style="left: ${pos}%"></div>
+                    </div>
+                    <div style="width: 50px;">${(pos/100).toFixed(2)}</div>
+                `;
+                plot.appendChild(row);
+            });
+        }
+
+        // 4. Live Log
+        const logMsgs = [
+            "EXTRACTING_P_VALUES...", "FILTERING_STUDY_BIAS...", "NORMALIZING_SAMPLE_SIZES...",
+            "RE-CALCULATING_ODDS_RATIOS...", "DETECTING_HETEROGENEITY...", "UPDATING_COCHRANE_PROTOCOLS...",
+            "SYNTHESIZING_QUALITATIVE_DATA...", "VALIDATING_EVIDENCE_STRENGTH..."
+        ];
+
+        function addLog() {
+            const container = document.getElementById('log-container');
+            const entry = document.createElement('div');
+            entry.className = 'feed-item';
+            entry.innerHTML = `<span style="color: var(--accent-green)">[SYS]</span> ${logMsgs[Math.floor(Math.random()*logMsgs.length)]}`;
+            container.prepend(entry);
+            if(container.childNodes.length > 8) container.removeChild(container.lastChild);
+        }
+
+        // Initialize
+        initCanvas();
+        window.addEventListener('resize', initCanvas);
+        for (let i = 0; i < 60; i++) nodes.push(new ResearchNode());
+        animateGraph();
+        animateValue("paper-count", 0, 1420, 2000);
+        animateValue("bias-val", 0, 0.14, 2500, 2);
+        animateValue("conf-lvl", 0, 95, 2000);
+        generatePlot();
+        setInterval(addLog, 3000);
     </script>
 </body>
 </html>
