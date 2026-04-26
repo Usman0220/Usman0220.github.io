@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SECURE_VAULT | ACCESS_GRANTED</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --red: #ff3e3e; --bg: #050000; }
+        body {
+            background: var(--bg);
+            color: var(--red);
+            font-family: 'JetBrains Mono', monospace;
+            padding: 50px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .warning {
+            border: 2px solid var(--red);
+            padding: 40px;
+            background: rgba(255, 0, 0, 0.05);
+            max-width: 600px;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
+        }
+        .glitch { font-size: 2rem; font-weight: 700; margin-bottom: 20px; text-shadow: 2px 2px #550000; }
+        .data-stream { font-size: 0.8rem; opacity: 0.7; height: 200px; overflow: hidden; margin-top: 20px; width: 100%; }
+        .back-link { margin-top: 30px; color: var(--red); text-decoration: none; border: 1px solid var(--red); padding: 5px 15px; font-size: 0.8rem; }
+        .back-link:hover { background: var(--red); color: black; }
+        #canvas { position: absolute; top: 0; left: 0; z-index: -1; opacity: 0.2; }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="warning">
+        <div class="glitch">UNAUTHORIZED ACCESS DETECTED</div>
+        <p>> ENCRYPTED_HANDSHAKE: [VERIFIED]</p>
+        <p>> WELCOME, OPERATIVE 0220.</p>
+        <p style="margin-top: 20px;">This is the restricted sector. Experimental medical AI payloads and security bypass protocols are stored here.</p>
+        
+        <div class="data-stream" id="stream"></div>
+    </div>
+
+    <a href="index.html" class="back-link">TERMINATE_SESSION</a>
+
+    <script>
+        const stream = document.getElementById('stream');
+        const hex = "0123456789ABCDEF";
+        function generateData() {
+            let line = "[INTERNAL_DATA] " + Array.from({length: 40}, () => hex[Math.floor(Math.random()*16)]).join('');
+            const p = document.createElement('div');
+            p.innerText = line;
+            stream.prepend(p);
+            if(stream.childNodes.length > 15) stream.removeChild(stream.lastChild);
+            setTimeout(generateData, 100);
+        }
+        generateData();
+
+        // Background effect
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        function draw() {
+            ctx.fillStyle = 'rgba(5, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff3e3e';
+            for(let i=0; i<50; i++) {
+                ctx.fillText(hex[Math.floor(Math.random()*16)], Math.random()*canvas.width, Math.random()*canvas.height);
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
+</html>

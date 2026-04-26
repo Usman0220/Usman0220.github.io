@@ -145,7 +145,7 @@
             <div class="diag-container" style="margin-top: 40px;">
                 <div style="margin-bottom: 10px; font-size: 0.8rem; display: flex; justify-content: space-between;">
                     <span>SYSTEM_STATUS</span>
-                    <span style="color: #2ecc71;">LIVE</span>
+                    <span style="color: #2ecc71; cursor: pointer;" id="secret-trigger"><span class="active-pulse"></span>LIVE</span>
                 </div>
                 <div class="diag-feed" id="diag-feed">
                     <!-- Dynamic entries via JS -->
@@ -289,7 +289,28 @@
             document.getElementById('uptime-display').innerText = `${h}:${m}:${s}`;
         }
 
-        // 5. Main Animation Loop
+        // 5. Secret System Override Trigger
+        let clickCount = 0;
+        let lastClick = 0;
+        document.getElementById('secret-trigger').addEventListener('click', () => {
+            const now = Date.now();
+            if (now - lastClick < 2000) {
+                clickCount++;
+            } else {
+                clickCount = 1;
+            }
+            lastClick = now;
+
+            if (clickCount === 3) {
+                document.body.style.transition = 'all 0.5s';
+                document.body.style.filter = 'invert(1) hue-rotate(90deg)';
+                setTimeout(() => {
+                    window.location.href = 'vault.html';
+                }, 800);
+            }
+        });
+
+        // 6. Main Animation Loop
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             handleParticles();
