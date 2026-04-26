@@ -37,7 +37,7 @@
     <div class="warning">
         <div class="glitch">UNAUTHORIZED ACCESS DETECTED</div>
         <p>> ENCRYPTED_HANDSHAKE: [VERIFIED]</p>
-        <p>> WELCOME, OPERATIVE 0220.</p>
+        <p>> WELCOME, <span id="deep-trigger" style="cursor: crosshair; font-weight: bold; text-decoration: underline;">OPERATIVE 0220</span>.</p>
         <p style="margin-top: 20px;">This is the restricted sector. Experimental medical AI payloads and security bypass protocols are stored here.</p>
         
         <div class="data-stream" id="stream"></div>
@@ -73,6 +73,19 @@
             requestAnimationFrame(draw);
         }
         draw();
+
+        // Deep Root Sync Trigger
+        let deepClicks = 0;
+        document.getElementById('deep-trigger').addEventListener('click', () => {
+            deepClicks++;
+            if (deepClicks === 5) {
+                document.body.style.background = "#0a1a05";
+                document.body.innerHTML = "<h1 style='color: #6b8e23; font-family: JetBrains Mono; text-align: center; margin-top: 20vh;'>INITIATING_ROOT_SYNC...</h1>";
+                setTimeout(() => {
+                    window.location.href = 'tree.html';
+                }, 1500);
+            }
+        });
     </script>
 </body>
 </html>

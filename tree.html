@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>THE_MOTHER_TREE | ROOT_ACCESS</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --tree-green: #6b8e23; --deep-bg: #050a02; }
+        body {
+            background: var(--deep-bg);
+            color: var(--tree-green);
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #tree-canvas { width: 100vw; height: 100vh; position: absolute; z-index: 1; }
+        .ui-overlay {
+            position: relative;
+            z-index: 10;
+            margin-top: 40px;
+            text-align: center;
+            background: rgba(0,0,0,0.6);
+            padding: 20px;
+            border: 1px solid var(--tree-green);
+            backdrop-filter: blur(5px);
+            pointer-events: none;
+        }
+        .nav-back {
+            position: fixed;
+            bottom: 30px;
+            color: var(--tree-green);
+            text-decoration: none;
+            border: 1px solid var(--tree-green);
+            padding: 8px 20px;
+            z-index: 20;
+            background: rgba(0,0,0,0.8);
+        }
+        .nav-back:hover { background: var(--tree-green); color: black; }
+        #info-box {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            width: 250px;
+            font-size: 0.7rem;
+            text-align: left;
+            z-index: 20;
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-left: 3px solid var(--tree-green);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="tree-canvas"></canvas>
+    
+    <div class="ui-overlay">
+        <h1 style="letter-spacing: 10px;">MOTHER_TREE_DIAGRAM</h1>
+        <p>> SOURCE_OF_ALL_SYNOPSES</p>
+    </div>
+
+    <div id="info-box">
+        <p>[LOG] Root established...</p>
+        <p>[LOG] Feeding medical data...</p>
+        <p>[LOG] Branching AI logic...</p>
+        <p>[LOG] Encrypting organic layers...</p>
+        <p>[STATUS] Stability 98.2%</p>
+    </div>
+
+    <a href="vault.html" class="nav-back">RETURN_TO_VAULT</a>
+
+    <script>
+        const canvas = document.getElementById('tree-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function drawTree(startX, startY, len, angle, branchWidth) {
+            ctx.beginPath();
+            ctx.save();
+            ctx.strokeStyle = `rgba(107, 142, 35, ${len/150})`;
+            ctx.lineWidth = branchWidth;
+            ctx.translate(startX, startY);
+            ctx.rotate(angle * Math.PI/180);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, -len);
+            ctx.stroke();
+
+            if (len < 10) {
+                // Draw nodes/leaves
+                ctx.fillStyle = '#808000';
+                ctx.beginPath();
+                ctx.arc(0, -len, 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+                return;
+            }
+
+            // Recursive branching
+            drawTree(0, -len, len * 0.75, angle - 15 - Math.random() * 10, branchWidth * 0.7);
+            drawTree(0, -len, len * 0.75, angle + 15 + Math.random() * 10, branchWidth * 0.7);
+
+            ctx.restore();
+        }
+
+        function animateTree() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Draw multiple roots/branches
+            drawTree(canvas.width / 2, canvas.height, 140, 0, 15);
+            
+            // Add some "data particles" floating up the tree
+            drawParticles();
+            requestAnimationFrame(animateTree);
+        }
+
+        let particles = [];
+        for(let i=0; i<30; i++) {
+            particles.push({
+                x: canvas.width/2 + (Math.random()-0.5)*100,
+                y: canvas.height,
+                speed: Math.random() * 2 + 1,
+                size: Math.random() * 2
+            });
+        }
+
+        function drawParticles() {
+            ctx.fillStyle = "#ffffff";
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+                ctx.fill();
+                p.y -= p.speed;
+                p.x += Math.sin(p.y/30);
+                if(p.y < 0) p.y = canvas.height;
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Set higher complexity for the initial draw
+        animateTree();
+    </script>
+</body>
+</html>
