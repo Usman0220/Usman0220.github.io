@@ -38,7 +38,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            background: radial-gradient(600px circle at var(--x) var(--y), rgba(107, 142, 35, 0.15), transparent 80%);
+            background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(107, 142, 35, 0.15), transparent 80%);
             z-index: 1;
         }
 
@@ -46,6 +46,7 @@
         .main-wrapper {
             max-width: 1200px; margin: 0 auto; padding: 40px 20px;
             display: grid; grid-template-columns: 350px 1fr; gap: 40px;
+            position: relative; z-index: 2;
         }
 
         .sidebar {
@@ -116,6 +117,8 @@
             display: inline-block; margin-right: 8px; animation: pulse-glow 2s infinite;
         }
 
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: 0; opacity: 0.4; }
+
         @media (max-width: 1000px) {
             .main-wrapper { grid-template-columns: 1fr; }
             .sidebar { position: static; height: auto; }
@@ -125,8 +128,7 @@
 <body>
 
     <canvas id="bg-canvas"></canvas>
-    <div id="cursor-dot"></div>
-    <div id="cursor-outline"></div>
+    <div id="spotlight"></div>
 
     <div class="main-wrapper">
         <aside class="sidebar">
@@ -152,7 +154,7 @@
 
             <div class="footer-sidebar">
                 <p style="font-size: 0.8rem; color: var(--text-muted);">
-                    COORD: <span id="coord-display">000, 000</span><br>
+                    COORD: <span id="coord-display">0000, 0000</span><br>
                     UPTIME: <span id="uptime-display">00:00:00</span>
                 </p>
             </div>
@@ -200,11 +202,11 @@
     </div>
 
     <script>
-        // 1. Particle Background System (Complex Web)
+        // 1. Particle Background System
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let mouse = { x: null, y: null };
+        let mouse = { x: 0, y: 0 };
 
         function initCanvas() {
             canvas.width = window.innerWidth;
@@ -247,24 +249,17 @@
             }
         }
 
-        // 2. Custom Cursor Reactive Logic
-        const dot = document.getElementById('cursor-dot');
-        const outline = document.getElementById('cursor-outline');
+        // 2. Interactive Spotlight & Coordinate Logic
+        const spotlight = document.getElementById('spotlight');
 
         window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX; mouse.y = e.clientY;
-            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
-            outline.style.left = e.clientX + 'px'; outline.style.top = e.clientY + 'px';
-            document.getElementById('coord-display').innerText = `${e.clientX.toString().padStart(4, '0')}, ${e.clientY.toString().padStart(4, '0')}`;
+            mouse.x = e.clientX; 
+            mouse.y = e.clientY;
             
-            // Interaction Hover
-            if (e.target.closest('.skill-card') || e.target.tagName === 'A') {
-                outline.style.width = '70px'; outline.style.height = '70px';
-                outline.style.background = 'rgba(107, 142, 35, 0.1)';
-            } else {
-                outline.style.width = '40px'; outline.style.height = '40px';
-                outline.style.background = 'transparent';
-            }
+            spotlight.style.setProperty('--x', e.clientX + 'px');
+            spotlight.style.setProperty('--y', e.clientY + 'px');
+
+            document.getElementById('coord-display').innerText = `${e.clientX.toString().padStart(4, '0')}, ${e.clientY.toString().padStart(4, '0')}`;
         });
 
         // 3. Dynamic Diagnostic Feed
@@ -304,14 +299,6 @@
         // Initialization
         initCanvas();
         window.addEventListener('resize', initCanvas);
-        for (let i = 0; i < 100; i++) particles.push(new Particle());
-        animate();
-        setInterval(addDiagItem, 2000);
-        setInterval(updateUptime, 1000);
-    </script>
-</body>
-</html>
-window.addEventListener('resize', initCanvas);
         for (let i = 0; i < 100; i++) particles.push(new Particle());
         animate();
         setInterval(addDiagItem, 2000);
