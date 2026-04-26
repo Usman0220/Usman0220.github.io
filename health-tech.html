@@ -2,44 +2,344 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Health Tech | Muhammad Usman</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health-Tech Innovation | Muhammad Usman</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background: #fcfdfa; color: #2f3e1b; font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; }
-        .nav-back { position: fixed; top: 20px; left: 20px; color: #556b2f; text-decoration: none; font-weight: 600; }
-        .sidebar { width: 300px; background: #556b2f; color: white; padding: 50px; }
-        .main { flex: 1; padding: 100px; position: relative; }
-        .dashboard-rect { border: 2px solid #556b2f; padding: 40px; border-radius: 20px; position: relative; overflow: hidden; }
-        .pulse-line { width: 100%; height: 100px; stroke: #6b8e23; fill: none; stroke-width: 2; }
+        :root {
+            --primary-green: #4a5d23;
+            --accent-green: #6b8e23;
+            --deep-bg: #050702;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e7d8;
+            --text-muted: #8a967d;
+            --warning: #f1c40f;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--deep-bg);
+            color: var(--text-main);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+        }
+
+        .nav-back {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            color: var(--accent-green);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 8px 15px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+        }
+
+        /* --- Sidebar Navigation --- */
+        .sidebar {
+            width: 320px;
+            background: rgba(10, 13, 5, 0.8);
+            border-right: 1px solid var(--glass-border);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            z-index: 10;
+        }
+
+        .logo-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--accent-green);
+        }
+
+        .nav-item {
+            padding: 15px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover { border-color: var(--accent-green); background: rgba(107, 142, 35, 0.1); }
+        .nav-item h4 { font-size: 0.9rem; margin-bottom: 5px; }
+        .nav-item p { font-size: 0.75rem; color: var(--text-muted); }
+
+        /* --- Main Dashboard Area --- */
+        .main-dashboard {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 20px;
+        }
+
+        .dashboard-header {
+            grid-column: span 2;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .glass-panel {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+        }
+
+        /* --- Biometric Stream (ECG) --- */
+        .biometric-container {
+            grid-column: span 2;
+            height: 180px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #ecg-canvas {
+            width: 100%;
+            height: 120px;
+            opacity: 0.8;
+        }
+
+        /* --- Innovation Telemetry --- */
+        .telemetry-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+            border-left: 2px solid var(--accent-green);
+        }
+
+        .stat-card small { font-family: 'JetBrains Mono', monospace; color: var(--text-muted); display: block; margin-bottom: 5px; font-size: 0.65rem; }
+        .stat-card span { font-size: 1.2rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+
+        /* --- Diagnostic Architecture --- */
+        .architecture-viz {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .node-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2ecc71;
+            box-shadow: 0 0 10px #2ecc71;
+            margin-right: 10px;
+        }
+
+        .pulse-text { animation: blink 2s infinite; }
+        @keyframes blink { 50% { opacity: 0.3; } }
+
+        @media (max-width: 1000px) {
+            body { overflow-y: auto; height: auto; flex-direction: column; }
+            .sidebar { width: 100%; }
+            .main-dashboard { grid-template-columns: 1fr; }
+            .dashboard-header { grid-column: span 1; }
+            .biometric-container { grid-column: span 1; }
+        }
     </style>
 </head>
 <body>
-    <a href="index.html" class="nav-back">← HOME</a>
-    <div class="sidebar">
-        <h2>Future Solutions</h2>
-        <p>Integrating diagnostic AI with clinical workflows to create seamless patient journeys.</p>
-    </div>
-    <div class="main">
-        <h1>Health Dashboard v1</h1>
-        <div class="dashboard-rect">
-            <svg class="pulse-line" viewBox="0 0 1000 100">
-                <polyline id="path" points="0,50 100,50 110,20 120,80 130,50 200,50 300,50 310,10 320,90 330,50 400,50 500,50 510,30 520,70 530,50 600,50 1000,50"></polyline>
-            </svg>
-            <p>System Status: <strong>OPERATIONAL</strong></p>
-            <p>AI Diagnostics: <strong>ONLINE</strong></p>
-            <p>Data Encryption: <strong>SECURED</strong></p>
+
+    <a href="index.html" class="nav-back">< BACK_TO_CORE</a>
+
+    <aside class="sidebar">
+        <div class="logo-tag">PROTO: HEALTH_TECH_v1.0</div>
+        
+        <div class="nav-item">
+            <h4>Diagnostic Kernels</h4>
+            <p>Optimizing AI inference for edge medical devices.</p>
         </div>
-    </div>
+        
+        <div class="nav-item">
+            <h4>Bio-Telemetry</h4>
+            <p>Secured real-time patient vital stream integration.</p>
+        </div>
+
+        <div class="nav-item">
+            <h4>Edge Integration</h4>
+            <p>Hardware-software handshake protocols for IoT.</p>
+        </div>
+
+        <div style="margin-top: auto;">
+            <div class="glitch-text" style="font-size: 0.7rem; color: var(--text-muted);">SYSTEM_VERSION: ALPHA_BUILD</div>
+            <div style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--accent-green);">[CONNECTED_STABLE]</div>
+        </div>
+    </aside>
+
+    <main class="main-dashboard">
+        <header class="dashboard-header">
+            <div class="logo-tag">MODULE // INNOVATION_LAB</div>
+            <h1>Bio-Digital Integration</h1>
+        </header>
+
+        <section class="glass-panel biometric-container">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span class="logo-tag">REALTIME_BIOMETRIC_STREAM</span>
+                <span style="color: #2ecc71; font-family: 'JetBrains Mono'; font-size: 0.7rem;" class="pulse-text">BPM: <span id="bpm-val">72</span></span>
+            </div>
+            <canvas id="ecg-canvas"></canvas>
+        </section>
+
+        <section class="glass-panel">
+            <div class="logo-tag">SYSTEM_TELEMETRY</div>
+            <div class="telemetry-grid">
+                <div class="stat-card">
+                    <small>LATENCY</small>
+                    <span id="latency">12ms</span>
+                </div>
+                <div class="stat-card">
+                    <small>INFERENCE_ACC</small>
+                    <span id="acc">98.4%</span>
+                </div>
+                <div class="stat-card">
+                    <small>SECURE_NODES</small>
+                    <span id="nodes">24/24</span>
+                </div>
+                <div class="stat-card" style="border-left-color: var(--warning);">
+                    <small>TEMP_CORE</small>
+                    <span id="temp">36.5°C</span>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">
+                Analyzing edge-computing performance for hospital-grade AI integration.
+            </p>
+        </section>
+
+        <section class="glass-panel architecture-viz">
+            <div class="logo-tag">DIAGNOSTIC_ARCHITECTURE</div>
+            
+            <div class="node-row">
+                <span style="font-size: 0.85rem;">Inference Engine</span>
+                <div style="display: flex; align-items: center;">
+                    <div class="status-dot"></div>
+                    <small style="color: var(--text-muted); font-family: 'JetBrains Mono';">STABLE</small>
+                </div>
+            </div>
+
+            <div class="node-row">
+                <span style="font-size: 0.85rem;">DICOM Pipeline</span>
+                <div style="display: flex; align-items: center;">
+                    <div class="status-dot"></div>
+                    <small style="color: var(--text-muted); font-family: 'JetBrains Mono';">ACTIVE</small>
+                </div>
+            </div>
+
+            <div class="node-row">
+                <span style="font-size: 0.85rem;">Secure Vault</span>
+                <div style="display: flex; align-items: center;">
+                    <div class="status-dot"></div>
+                    <small style="color: var(--text-muted); font-family: 'JetBrains Mono';">ENCRYPTED</small>
+                </div>
+            </div>
+
+            <div class="node-row">
+                <span style="font-size: 0.85rem;">External Sync</span>
+                <div style="display: flex; align-items: center;">
+                    <div class="status-dot" style="background: var(--warning); box-shadow: 0 0 10px var(--warning);"></div>
+                    <small style="color: var(--text-muted); font-family: 'JetBrains Mono';">PENDING</small>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <script>
-        const path = document.getElementById('path');
-        let offset = 0;
-        function animate() {
-            offset -= 2;
-            path.style.transform = `translateX(${offset}px)`;
-            if(Math.abs(offset) > 400) offset = 0;
-            requestAnimationFrame(animate);
+        // 1. Sophisticated ECG Stream
+        const canvas = document.getElementById('ecg-canvas');
+        const ctx = canvas.getContext('2d');
+        let points = [];
+        let x = 0;
+
+        function initCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 120;
         }
-        animate();
+
+        function drawECG() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#6b8e23';
+            ctx.lineWidth = 2;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#6b8e23';
+            ctx.beginPath();
+            
+            for (let i = 0; i < points.length; i++) {
+                if (i === 0) ctx.moveTo(points[i].x, points[i].y);
+                else ctx.lineTo(points[i].x, points[i].y);
+            }
+            ctx.stroke();
+
+            // Generate Points
+            let baseLine = 60;
+            let targetY = baseLine;
+            
+            // Pulse Logic
+            if (x % 100 === 0) targetY = 20; // P Wave
+            else if (x % 100 === 10) targetY = baseLine;
+            else if (x % 100 === 20) targetY = 100; // Q Wave
+            else if (x % 100 === 25) targetY = 10;  // R Peak
+            else if (x % 100 === 30) targetY = 110; // S Wave
+            else if (x % 100 === 40) targetY = baseLine;
+            else if (x % 100 === 60) targetY = 40;  // T Wave
+            else targetY = baseLine + (Math.random() - 0.5) * 5; // Noise
+
+            points.push({ x: canvas.width, y: targetY });
+            
+            // Shift points
+            points.forEach(p => p.x -= 2);
+            points = points.filter(p => p.x > 0);
+            
+            x++;
+            requestAnimationFrame(drawECG);
+        }
+
+        // 2. Dynamic Metrics Simulation
+        function updateStats() {
+            document.getElementById('latency').innerText = (10 + Math.random() * 5).toFixed(1) + 'ms';
+            document.getElementById('bpm-val').innerText = (70 + Math.random() * 5).toFixed(0);
+            document.getElementById('temp').innerText = (36.4 + Math.random() * 0.4).toFixed(1) + '°C';
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        drawECG();
+        setInterval(updateStats, 2000);
     </script>
 </body>
 </html>
