@@ -69,9 +69,10 @@
             requestAnimationFrame(draw);
         }
         draw();
-    </script>
-</body>
-</html>ument.getElementById('brain-trigger').addEventListener('click', () => {
+
+        // Brain Secret Trigger
+        let brainClicks = 0;
+        document.getElementById('brain-trigger').addEventListener('click', () => {
             brainClicks++;
             if (brainClicks === 5) {
                 document.body.style.background = "#ffffff";
