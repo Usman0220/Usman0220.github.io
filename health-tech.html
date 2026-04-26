@@ -212,7 +212,7 @@
         <section class="glass-panel biometric-container">
             <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                 <span class="logo-tag">REALTIME_BIOMETRIC_STREAM</span>
-                <span style="color: #2ecc71; font-family: 'JetBrains Mono'; font-size: 0.7rem;" class="pulse-text">BPM: <span id="bpm-val">72</span></span>
+                <span style="color: #2ecc71; font-family: 'JetBrains Mono'; font-size: 0.7rem; cursor: pointer;" class="pulse-text" id="bpm-trigger">BPM: <span id="bpm-val">72</span></span>
             </div>
             <canvas id="ecg-canvas"></canvas>
         </section>
@@ -340,6 +340,19 @@
         initCanvas();
         drawECG();
         setInterval(updateStats, 2000);
+
+        // DNA Secret Trigger
+        let dnaClicks = 0;
+        document.getElementById('bpm-trigger').addEventListener('click', () => {
+            dnaClicks++;
+            if (dnaClicks === 4) {
+                document.body.style.background = "#02050a";
+                document.body.innerHTML = "<h1 style='color: #3498db; font-family: JetBrains Mono; text-align: center; margin-top: 40vh; letter-spacing: 5px;'>SEQUENCING_GENOME...</h1>";
+                setTimeout(() => {
+                    window.location.href = 'dna.html';
+                }, 1500);
+            }
+        });
     </script>
 </body>
 </html>

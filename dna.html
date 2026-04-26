@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GENOMIC_CORE | DNA_SEQUENCING</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --dna-blue: #3498db; --dna-green: #2ecc71; --bg: #05070a; }
+        body {
+            background: var(--bg);
+            color: var(--dna-blue);
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #dna-canvas { width: 100vw; height: 100vh; position: absolute; z-index: 1; }
+        .ui-panel {
+            position: relative;
+            z-index: 10;
+            margin-top: 40px;
+            background: rgba(0,0,0,0.7);
+            padding: 25px;
+            border: 1px solid var(--dna-blue);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        .nav-back {
+            position: fixed;
+            bottom: 30px;
+            color: var(--dna-blue);
+            text-decoration: none;
+            border: 1px solid var(--dna-blue);
+            padding: 10px 25px;
+            z-index: 20;
+            background: rgba(0,0,0,0.8);
+            transition: all 0.3s;
+        }
+        .nav-back:hover { background: var(--dna-blue); color: #000; }
+        #status-log {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            font-size: 0.7rem;
+            color: var(--dna-green);
+            z-index: 20;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="dna-canvas"></canvas>
+
+    <div class="ui-panel">
+        <h1 style="letter-spacing: 5px; margin: 0;">GENOMIC_CORE_v1</h1>
+        <p style="font-size: 0.8rem; margin-top: 10px;">> MAPPING_BIOLOGICAL_FOUNDATIONS</p>
+    </div>
+
+    <div id="status-log"></div>
+
+    <a href="health-tech.html" class="nav-back">EXIT_CORE_SYNC</a>
+
+    <script>
+        const canvas = document.getElementById('dna-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let t = 0;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        const dots = 30;
+        const spacing = height / dots;
+
+        function drawDNA() {
+            ctx.fillStyle = 'rgba(5, 7, 10, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+
+            const centerX = width / 2;
+            const amplitude = 150;
+            const speed = 0.05;
+
+            for (let i = 0; i < dots; i++) {
+                const y = i * spacing + (t * 20 % spacing);
+                const angle = (i * 0.3) + t;
+
+                // Strand 1
+                const x1 = centerX + Math.sin(angle) * amplitude;
+                const size1 = (Math.cos(angle) + 2) * 3;
+                
+                // Strand 2
+                const x2 = centerX + Math.sin(angle + Math.PI) * amplitude;
+                const size2 = (Math.cos(angle + Math.PI) + 2) * 3;
+
+                // Connection line
+                ctx.strokeStyle = 'rgba(52, 152, 219, 0.2)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(x1, y);
+                ctx.lineTo(x2, y);
+                ctx.stroke();
+
+                // Nucleotides
+                ctx.fillStyle = i % 2 === 0 ? '#3498db' : '#2ecc71';
+                ctx.beginPath();
+                ctx.arc(x1, y, size1, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = i % 2 === 0 ? '#2ecc71' : '#3498db';
+                ctx.beginPath();
+                ctx.arc(x2, y, size2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            t += speed;
+            requestAnimationFrame(drawDNA);
+        }
+
+        const log = document.getElementById('status-log');
+        const msgs = [
+            "READING_BASE_PAIRS...", "DETECTING_MUTATIONS...", "SYNTHESIZING_RNA...",
+            "CRISPR_HANDSHAKE_ACTIVE...", "MAPPING_CHROMOSOME_21...", "BIOMETRIC_ENCRYPTION_STABLE"
+        ];
+
+        function addLog() {
+            const p = document.createElement('div');
+            p.innerText = `[${new Date().toLocaleTimeString()}] ${msgs[Math.floor(Math.random()*msgs.length)]}`;
+            log.prepend(p);
+            if(log.childNodes.length > 10) log.removeChild(log.lastChild);
+        }
+
+        setInterval(addLog, 2000);
+        drawDNA();
+    </script>
+</body>
+</html>
