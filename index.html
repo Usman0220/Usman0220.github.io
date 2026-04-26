@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Usman | MBBS & Health Tech</title>
+    <title>Muhammad Usman | MBBS & Health Tech Journey</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -38,7 +38,15 @@
             padding: 60px;
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-            border-top: 6px solid var(--primary-green);
+            border-top: 8px solid var(--primary-green);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         header {
@@ -65,6 +73,9 @@
             margin: 25px 0;
             color: var(--text-main);
             font-weight: 400;
+            border-left: 4px solid var(--accent-green);
+            padding-left: 15px;
+            font-style: italic;
         }
 
         section {
@@ -86,33 +97,31 @@
         }
 
         .card {
-            padding: 15px;
-            border-radius: 6px;
+            padding: 20px;
+            border-radius: 8px;
             background: #fafafa;
-            border-left: 3px solid var(--accent-green);
+            border-top: 3px solid var(--accent-green);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: #fdfdfd;
         }
 
         .card strong {
             display: block;
             color: var(--primary-green);
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
         }
 
-        ul {
-            list-style: none;
-        }
-
-        li {
-            margin-bottom: 12px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
+        .learning-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 8px;
+            display: block;
         }
 
         .contact-box {
@@ -121,6 +130,7 @@
             padding: 30px;
             border-radius: 8px;
             text-align: center;
+            margin-top: 50px;
         }
 
         .contact-box p {
@@ -135,72 +145,55 @@
             color: var(--text-muted);
         }
 
-        /* JS Animation Class */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         @media (max-width: 600px) {
             .container { padding: 30px; }
             .grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2rem; }
+            h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container reveal">
+    <div class="container" id="main-container">
         <header>
-            <span class="subtitle">Final-year MBBS Student</span>
+            <span class="subtitle">Final-Year MBBS Student</span>
             <h1>Muhammad Usman</h1>
-            <p class="tagline">🚀 Bridging Medicine, AI, Research, and Cybersecurity</p>
+            <p class="tagline">🚀 Bridging Medicine, AI, Research, and Cybersecurity — while learning hard things</p>
         </header>
 
         <section>
-            <h2>About Me</h2>
-            <p>I am a final-year MBBS student at <strong>CIMS Multan (NUMS-affiliated)</strong> with a strong interest in medical AI, research, and cybersecurity. I am passionate about leveraging artificial intelligence, medical data science, and digital security to enhance healthcare systems and patient outcomes.</p>
+            <h2>About My Journey</h2>
+            <p>I am a final-year MBBS student at <strong>CIMS Multan (NUMS-affiliated)</strong>. I am exploring how AI, data, and cybersecurity can modernize healthcare. I am early in this journey and dedicated to bridging the gap between clinical medicine and technical innovation.</p>
         </section>
 
         <section>
-            <h2>Key Skills & Interests</h2>
+            <h2>Where I'm At</h2>
             <div class="grid">
                 <div class="card">
                     <strong>AI in Medicine</strong>
-                    Python, OpenCV, and AI applications in medical imaging diagnostics.
+                    Learning Python for AI and OpenCV. Currently exploring medical imaging projects.
+                    <span class="learning-note">"It's hard, but I'm diving in."</span>
                 </div>
                 <div class="card">
-                    <strong>Research & Data</strong>
-                    Systematic reviews, meta-analysis, and medical data science.
+                    <strong>Medical Research & Data</strong>
+                    Exploring systematic reviews and meta-analysis to drive evidence-based insights.
+                    <span class="learning-note">"Developing deep research skills."</span>
                 </div>
                 <div class="card">
                     <strong>Cybersecurity</strong>
-                    Medical data security, vulnerability assessments, and digital health protection.
+                    Understanding medical data security and digital health protection as a vital separate skill.
+                    <span class="learning-note">"Protecting the future of health data."</span>
                 </div>
                 <div class="card">
                     <strong>Health Tech</strong>
-                    Exploring AI-driven healthcare solutions and innovation.
+                    Curious about AI-driven healthcare solutions and future diagnostic innovations.
+                    <span class="learning-note">"Seeking meaningful tech applications."</span>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2>Current Initiatives</h2>
-            <ul>
-                <li>Learning AI-driven healthcare innovations for diagnostics & research.</li>
-                <li>Developing skills in medical data analysis and systematic reviews.</li>
-                <li>Exploring cybersecurity applications in healthcare to improve data protection.</li>
-            </ul>
-        </section>
-
         <div class="contact-box">
-            <p>💡 Let’s connect! I’m looking for collaborations and mentorship in Medical AI & Health Technology.</p>
+            <p>💡 <strong>Let's connect!</strong> I am serious about learning and open to collaborations, mentorship, and opportunities in Medical AI, Research, and Health Tech.</p>
         </div>
 
         <footer>
@@ -214,13 +207,13 @@
             document.getElementById('year').textContent = new Date().getFullYear();
 
             // Reveal Animation
-            const revealElement = document.querySelector('.reveal');
+            const container = document.getElementById('main-container');
             setTimeout(() => {
-                revealElement.classList.add('active');
-            }, 150);
+                container.classList.add('visible');
+            }, 100);
 
             // Simple Interactivity: Log a professional greeting
-            console.log("%c Muhammad Usman Profile Loaded ", "color: #4a5d23; font-weight: bold; background-color: #f4f7f0; padding: 5px;");
+            console.log("%c Profile Updated Successfully ", "color: #ffffff; font-weight: bold; background-color: #4a5d23; padding: 5px;");
         });
     </script>
 </body>
