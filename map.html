@@ -2,67 +2,169 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>THREAT_MAP | Muhammad Usman</title>
+    <title>GLOBAL_THREAT_MONITOR | Muhammad Usman</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { background: #000; color: #0f0; font-family: 'JetBrains Mono', monospace; margin: 0; overflow: hidden; }
+        :root { --hacker-green: #00ff41; --dim-green: rgba(0, 255, 65, 0.2); --bg: #050805; }
+        body { background: var(--bg); color: var(--hacker-green); font-family: 'JetBrains Mono', monospace; margin: 0; overflow: hidden; }
         canvas { display: block; }
-        .overlay { position: fixed; top: 20px; left: 20px; padding: 20px; background: rgba(0,255,0,0.1); border: 1px solid #0f0; pointer-events: none; }
-        .nav { position: fixed; bottom: 20px; right: 20px; color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 10px 20px; }
+        .overlay { 
+            position: fixed; top: 30px; left: 30px; padding: 25px; 
+            background: rgba(0, 20, 0, 0.8); border: 1px solid var(--hacker-green); 
+            backdrop-filter: blur(10px); pointer-events: none; z-index: 10;
+        }
+        .stats-panel {
+            position: fixed; bottom: 30px; left: 30px; padding: 20px;
+            background: rgba(0, 20, 0, 0.8); border: 1px solid var(--hacker-green);
+            font-size: 0.7rem; z-index: 10;
+        }
+        .nav-exit {
+            position: fixed; bottom: 30px; right: 30px; 
+            color: var(--hacker-green); text-decoration: none; 
+            border: 1px solid var(--hacker-green); padding: 10px 25px; 
+            background: rgba(0,0,0,0.8); transition: all 0.3s; z-index: 10;
+        }
+        .nav-exit:hover { background: var(--hacker-green); color: black; }
+        .glitch-text { animation: pulse 2s infinite; }
+        @keyframes pulse { 50% { opacity: 0.5; } }
     </style>
 </head>
 <body>
-    <div class="overlay">GLOBAL_THREAT_MONITOR v2.0<br>STATUS: ACTIVE<br>TARGET_LOCK: NULL</div>
-    <canvas id="map"></canvas>
-    <a href="cybersecurity.html" class="nav">DISCONNECT</a>
-    <script>
-        const canvas = document.getElementById('map');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    <div class="overlay">
+        <div style="font-size: 1.2rem; margin-bottom: 10px; font-weight: 700;">COMMAND_CENTER_v4.2</div>
+        <div class="glitch-text">STATUS: MONITORING_GLOBAL_VECTORS</div>
+        <div id="target-info" style="margin-top: 15px; font-size: 0.8rem; color: #fff;">SCANNING...</div>
+    </div>
 
-        function drawWorld() {
-            ctx.fillStyle = 'rgba(0, 40, 0, 0.1)';
-            for(let i=0; i<1000; i++) {
-                ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 2, 2);
+    <div class="stats-panel">
+        <div>LATENCY: <span id="ping">24ms</span></div>
+        <div>ACTIVE_THREATS: <span id="threat-count">0</span></div>
+        <div>UPLINK: SECURE_ENCRYPTED</div>
+    </div>
+
+    <canvas id="threatMap"></canvas>
+    <a href="cybersecurity.html" class="nav-exit">TERMINATE_LINK</a>
+
+    <script>
+        const canvas = document.getElementById('threatMap');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let attacks = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // 1. Dotted World Map Data (Simplified Continent Silhouettes)
+        const mapDots = [];
+        function initMap() {
+            // This creates a technical "dotted" grid that roughly mimics continents
+            for (let i = 0; i < 180; i += 2.5) {
+                for (let j = 0; j < 90; j += 4) {
+                    // Very simple mathematical continent approximation
+                    let x = (i / 180) * width;
+                    let y = (j / 90) * height;
+                    
+                    // Simple logic to keep dots only in continent-like areas
+                    let noise = Math.sin(i * 0.1) * Math.cos(j * 0.2);
+                    if (noise > -0.2) {
+                        mapDots.push({ x, y, alpha: Math.random() * 0.5 + 0.1 });
+                    }
+                }
             }
         }
 
-        let attacks = [];
-        class Attack {
+        function drawMap() {
+            ctx.fillStyle = 'rgba(5, 8, 5, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+            
+            ctx.fillStyle = 'rgba(0, 255, 65, 0.15)';
+            mapDots.forEach(dot => {
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, 1, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        // 2. Complex Attack Vectors
+        class AttackVector {
             constructor() {
-                this.sx = Math.random()*canvas.width;
-                this.sy = Math.random()*canvas.height;
-                this.tx = Math.random()*canvas.width;
-                this.ty = Math.random()*canvas.height;
-                this.p = 0;
+                this.sx = Math.random() * width;
+                this.sy = Math.random() * height;
+                this.tx = Math.random() * width;
+                this.ty = Math.random() * height;
+                this.progress = 0;
+                this.speed = 0.005 + Math.random() * 0.01;
+                this.color = Math.random() > 0.8 ? '#ff3e3e' : '#00ff41';
             }
+
             draw() {
-                ctx.strokeStyle = '#0f0';
-                ctx.lineWidth = 1;
+                this.progress += this.speed;
+                if (this.progress > 1) return false;
+
+                // Bezier Curve Logic
+                const cp1x = this.sx + (this.tx - this.sx) / 2;
+                const cp1y = Math.min(this.sy, this.ty) - 100;
+
+                ctx.setLineDash([5, 5]);
+                ctx.strokeStyle = this.color + '44';
                 ctx.beginPath();
                 ctx.moveTo(this.sx, this.sy);
-                let cx = this.sx + (this.tx-this.sx)*this.p;
-                let cy = this.sy + (this.ty-this.sy)*this.p;
-                ctx.lineTo(cx, cy);
+                ctx.quadraticCurveTo(cp1x, cp1y, this.tx, this.ty);
                 ctx.stroke();
-                this.p += 0.02;
-                if(this.p >= 1) {
-                    ctx.fillStyle = '#f00';
-                    ctx.beginPath(); ctx.arc(this.tx, this.ty, 4, 0, Math.PI*2); ctx.fill();
-                    return false;
+
+                // Animated Line
+                ctx.setLineDash([]);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(this.sx, this.sy);
+                
+                // Draw only up to progress
+                const t = this.progress;
+                const qx = (1 - t) * (1 - t) * this.sx + 2 * (1 - t) * t * cp1x + t * t * this.tx;
+                const qy = (1 - t) * (1 - t) * this.sy + 2 * (1 - t) * t * cp1y + t * t * this.ty;
+                
+                ctx.quadraticCurveTo(cp1x, cp1y, qx, qy);
+                ctx.stroke();
+
+                // Impact Spark
+                if (this.progress > 0.95) {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.tx, this.ty, 4, 0, Math.PI * 2);
+                    ctx.fill();
                 }
+
                 return true;
             }
         }
 
-        function animate() {
-            ctx.fillStyle = 'rgba(0,0,0,0.1)';
-            ctx.fillRect(0,0,canvas.width, canvas.height);
-            drawWorld();
-            if(Math.random() > 0.95) attacks.push(new Attack());
+        function update() {
+            drawMap();
+            
+            if (Math.random() > 0.96) {
+                attacks.push(new AttackVector());
+                document.getElementById('threat-count').innerText = attacks.length;
+            }
+
             attacks = attacks.filter(a => a.draw());
-            requestAnimationFrame(animate);
+            
+            // Random Stats
+            if(Math.random() > 0.99) {
+                document.getElementById('ping').innerText = Math.floor(Math.random()*20 + 20) + 'ms';
+                const locations = ["LONDON", "TOKYO", "NEW_YORK", "MULTAN", "BERLIN", "DUBAI"];
+                document.getElementById('target-info').innerText = "TARGET: " + locations[Math.floor(Math.random()*locations.length)] + "_NODE_" + Math.floor(Math.random()*999);
+            }
+
+            requestAnimationFrame(update);
         }
-        animate();
+
+        initMap();
+        update();
     </script>
 </body>
 </html>
