@@ -3,183 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Usman | Professional Profile</title>
+    <title>Muhammad Usman | MBBS & Health Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --olive-dark: #556b2f;
-            --olive-mid: #6b8e23;
-            --olive-light: #808000;
-            --bg-color: #fcfdfa;
-            --text-color: #2f3e1b;
-            --border-color: #d4dbc7;
+            --primary-green: #4a5d23; /* Deep Olive */
+            --accent-green: #6b8e23; /* Olive Drab */
+            --light-sage: #f4f7f0;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.7;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            margin: 0;
-            display: flex;
-            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-sage);
+            color: var(--text-main);
+            line-height: 1.6;
             padding: 40px 20px;
         }
 
-        .profile-card {
-            background: #ffffff;
-            max-width: 750px;
-            width: 100%;
-            padding: 50px;
-            border-left: 8px solid var(--olive-dark);
-            box-shadow: 0 10px 30px rgba(85, 107, 47, 0.1);
-            border-radius: 4px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease-out;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid var(--primary-green);
         }
 
-        .profile-card.visible {
-            opacity: 1;
-            transform: translateY(0);
+        header {
+            margin-bottom: 40px;
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            color: var(--olive-dark);
-            letter-spacing: -0.02em;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
         }
 
-        .title-sub {
+        .subtitle {
             font-size: 1.1rem;
-            color: var(--olive-mid);
-            font-weight: 600;
+            color: var(--accent-green);
+            font-weight: 500;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 25px;
-            display: block;
         }
 
         .tagline {
-            font-size: 1.2rem;
-            color: var(--text-color);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            font-size: 1.25rem;
+            margin: 25px 0;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        section {
+            margin-bottom: 40px;
         }
 
         h2 {
-            font-size: 1.5rem;
-            color: var(--olive-dark);
-            margin-top: 40px;
-            border-bottom: 2px solid var(--border-color);
-            display: inline-block;
-            padding-right: 20px;
+            font-size: 1.4rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
-        .content-section {
-            margin-bottom: 30px;
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            padding: 15px;
+            border-radius: 6px;
+            background: #fafafa;
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .card strong {
+            display: block;
+            color: var(--primary-green);
+            margin-bottom: 5px;
         }
 
         ul {
             list-style: none;
-            padding: 0;
         }
 
         li {
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f3eb;
-            display: flex;
-            align-items: flex-start;
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
         }
 
         li::before {
-            content: "•";
-            color: var(--olive-mid);
-            font-weight: bold;
-            margin-right: 15px;
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
         }
 
-        .highlight {
-            font-weight: 600;
-            color: var(--olive-dark);
+        .contact-box {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
         }
 
-        .footer {
-            margin-top: 60px;
-            font-size: 0.85rem;
-            color: #a0a891;
-            text-align: right;
-            border-top: 1px solid var(--border-color);
-            padding-top: 15px;
+        .contact-box p {
+            margin-bottom: 0;
+            font-weight: 500;
         }
 
-        /* JavaScript Interactivity Classes */
-        .hover-effect:hover {
-            color: var(--olive-mid);
-            transition: color 0.3s;
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* JS Animation Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         @media (max-width: 600px) {
-            .profile-card { padding: 30px; }
-            h1 { font-size: 1.8rem; }
+            .container { padding: 30px; }
+            .grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="profile-card" id="card">
+
+    <div class="container reveal">
         <header>
-            <span class="title-sub">Medical Professional & Researcher</span>
+            <span class="subtitle">Final-year MBBS Student</span>
             <h1>Muhammad Usman</h1>
             <p class="tagline">🚀 Bridging Medicine, AI, Research, and Cybersecurity</p>
         </header>
 
-        <div class="content-section">
-            <p>I am a final-year MBBS student at <strong>CIMS Multan (NUMS-affiliated)</strong>. My focus is on leveraging artificial intelligence and data science to modernize healthcare systems and improve patient outcomes with a secure, technology-driven approach.</p>
-        </div>
+        <section>
+            <h2>About Me</h2>
+            <p>I am a final-year MBBS student at <strong>CIMS Multan (NUMS-affiliated)</strong> with a strong interest in medical AI, research, and cybersecurity. I am passionate about leveraging artificial intelligence, medical data science, and digital security to enhance healthcare systems and patient outcomes.</p>
+        </section>
 
-        <div class="content-section">
-            <h2>Core Focus Areas</h2>
-            <ul>
-                <li><span class="highlight">AI in Medicine</span> – Specializing in Python (AI), OpenCV, and medical imaging diagnostics.</li>
-                <li><span class="highlight">Medical Research</span> – Systematic reviews, meta-analysis, and data-driven healthcare insights.</li>
-                <li><span class="highlight">Cybersecurity</span> – Protecting medical data integrity and digital health infrastructure.</li>
-                <li><span class="highlight">Innovation</span> – Developing AI-driven solutions for the next generation of healthcare.</li>
-            </ul>
-        </div>
+        <section>
+            <h2>Key Skills & Interests</h2>
+            <div class="grid">
+                <div class="card">
+                    <strong>AI in Medicine</strong>
+                    Python, OpenCV, and AI applications in medical imaging diagnostics.
+                </div>
+                <div class="card">
+                    <strong>Research & Data</strong>
+                    Systematic reviews, meta-analysis, and medical data science.
+                </div>
+                <div class="card">
+                    <strong>Cybersecurity</strong>
+                    Medical data security, vulnerability assessments, and digital health protection.
+                </div>
+                <div class="card">
+                    <strong>Health Tech</strong>
+                    Exploring AI-driven healthcare solutions and innovation.
+                </div>
+            </div>
+        </section>
 
-        <div class="content-section">
+        <section>
             <h2>Current Initiatives</h2>
             <ul>
-                <li class="hover-effect">Advancing AI-driven diagnostics for clinical research.</li>
-                <li class="hover-effect">Mastering medical data analysis and systematic evidence synthesis.</li>
-                <li class="hover-effect">Securing healthcare systems against emerging digital vulnerabilities.</li>
+                <li>Learning AI-driven healthcare innovations for diagnostics & research.</li>
+                <li>Developing skills in medical data analysis and systematic reviews.</li>
+                <li>Exploring cybersecurity applications in healthcare to improve data protection.</li>
             </ul>
+        </section>
+
+        <div class="contact-box">
+            <p>💡 Let’s connect! I’m looking for collaborations and mentorship in Medical AI & Health Technology.</p>
         </div>
 
-        <p style="margin-top: 40px;">
-            <strong>💡 Collaboration:</strong> Open to mentorship and research opportunities in Health Tech.
-        </p>
-
-        <footer class="footer">
-            Professional Profile &copy; <span id="year"></span> Muhammad Usman
+        <footer>
+            &copy; <span id="year"></span> Muhammad Usman | Professional Profile
         </footer>
     </div>
 
     <script>
-        // Professional Fade-in Effect
-        window.addEventListener('DOMContentLoaded', () => {
-            const card = document.getElementById('card');
-            setTimeout(() => {
-                card.classList.add('visible');
-            }, 100);
-
-            // Dynamic Year
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set Current Year
             document.getElementById('year').textContent = new Date().getFullYear();
-        });
 
-        // Simple interactive element: Log entry to console to show JS is active
-        console.log("Professional Profile Loaded Successfully.");
+            // Reveal Animation
+            const revealElement = document.querySelector('.reveal');
+            setTimeout(() => {
+                revealElement.classList.add('active');
+            }, 150);
+
+            // Simple Interactivity: Log a professional greeting
+            console.log("%c Muhammad Usman Profile Loaded ", "color: #4a5d23; font-weight: bold; background-color: #f4f7f0; padding: 5px;");
+        });
     </script>
 </body>
 </html>
