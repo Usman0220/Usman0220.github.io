@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Usman | Professional Profile</title>
+    <style>
+        :root {
+            --olive-dark: #556b2f;
+            --olive-mid: #6b8e23;
+            --olive-light: #808000;
+            --bg-color: #fcfdfa;
+            --text-color: #2f3e1b;
+            --border-color: #d4dbc7;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .profile-card {
+            background: #ffffff;
+            max-width: 750px;
+            width: 100%;
+            padding: 50px;
+            border-left: 8px solid var(--olive-dark);
+            box-shadow: 0 10px 30px rgba(85, 107, 47, 0.1);
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .profile-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: var(--olive-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .title-sub {
+            font-size: 1.1rem;
+            color: var(--olive-mid);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--olive-dark);
+            margin-top: 40px;
+            border-bottom: 2px solid var(--border-color);
+            display: inline-block;
+            padding-right: 20px;
+        }
+
+        .content-section {
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f3eb;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--olive-mid);
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: var(--olive-dark);
+        }
+
+        .footer {
+            margin-top: 60px;
+            font-size: 0.85rem;
+            color: #a0a891;
+            text-align: right;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        /* JavaScript Interactivity Classes */
+        .hover-effect:hover {
+            color: var(--olive-mid);
+            transition: color 0.3s;
+        }
+
+        @media (max-width: 600px) {
+            .profile-card { padding: 30px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card" id="card">
+        <header>
+            <span class="title-sub">Medical Professional & Researcher</span>
+            <h1>Muhammad Usman</h1>
+            <p class="tagline">🚀 Bridging Medicine, AI, Research, and Cybersecurity</p>
+        </header>
+
+        <div class="content-section">
+            <p>I am a final-year MBBS student at <strong>CIMS Multan (NUMS-affiliated)</strong>. My focus is on leveraging artificial intelligence and data science to modernize healthcare systems and improve patient outcomes with a secure, technology-driven approach.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Core Focus Areas</h2>
+            <ul>
+                <li><span class="highlight">AI in Medicine</span> – Specializing in Python (AI), OpenCV, and medical imaging diagnostics.</li>
+                <li><span class="highlight">Medical Research</span> – Systematic reviews, meta-analysis, and data-driven healthcare insights.</li>
+                <li><span class="highlight">Cybersecurity</span> – Protecting medical data integrity and digital health infrastructure.</li>
+                <li><span class="highlight">Innovation</span> – Developing AI-driven solutions for the next generation of healthcare.</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Current Initiatives</h2>
+            <ul>
+                <li class="hover-effect">Advancing AI-driven diagnostics for clinical research.</li>
+                <li class="hover-effect">Mastering medical data analysis and systematic evidence synthesis.</li>
+                <li class="hover-effect">Securing healthcare systems against emerging digital vulnerabilities.</li>
+            </ul>
+        </div>
+
+        <p style="margin-top: 40px;">
+            <strong>💡 Collaboration:</strong> Open to mentorship and research opportunities in Health Tech.
+        </p>
+
+        <footer class="footer">
+            Professional Profile &copy; <span id="year"></span> Muhammad Usman
+        </footer>
+    </div>
+
+    <script>
+        // Professional Fade-in Effect
+        window.addEventListener('DOMContentLoaded', () => {
+            const card = document.getElementById('card');
+            setTimeout(() => {
+                card.classList.add('visible');
+            }, 100);
+
+            // Dynamic Year
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+
+        // Simple interactive element: Log entry to console to show JS is active
+        console.log("Professional Profile Loaded Successfully.");
+    </script>
+</body>
+</html>
