@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NEURAL_SYNAPSE | Muhammad Usman</title>
+    <style>
+        body { background: #fff; margin: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        canvas { filter: blur(1px) contrast(1.2); }
+        .ui { position: fixed; top: 40px; font-family: sans-serif; text-transform: uppercase; letter-spacing: 5px; color: #4a5d23; text-align: center; }
+        .nav { position: fixed; bottom: 40px; color: #4a5d23; text-decoration: none; font-family: sans-serif; border: 1px solid #4a5d23; padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <div class="ui">Neural Synapse Mapping Active</div>
+    <canvas id="canvas"></canvas>
+    <a href="ai-medicine.html" class="nav">EXIT_BRAIN_SYNC</a>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        class Synapse {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.glow = 0;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                this.glow = Math.max(0, this.glow - 0.05);
+            }
+            draw() {
+                ctx.fillStyle = `rgba(107, 142, 35, ${0.1 + this.glow})`;
+                ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI*2); ctx.fill();
+            }
+        }
+
+        for(let i=0; i<100; i++) particles.push(new Synapse());
+
+        function animate() {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                p.update(); p.draw();
+                particles.slice(i+1).forEach(m => {
+                    let d = Math.hypot(p.x-m.x, p.y-m.y);
+                    if(d < 100) {
+                        ctx.strokeStyle = `rgba(74, 93, 35, ${0.2 * (1 - d/100)})`;
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(m.x, m.y); ctx.stroke();
+                        if(Math.random() > 0.999) { p.glow = 1; m.glow = 1; }
+                    }
+                });
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>

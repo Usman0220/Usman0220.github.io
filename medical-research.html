@@ -323,6 +323,19 @@
         animateValue("conf-lvl", 0, 95, 2000);
         generatePlot();
         setInterval(addLog, 3000);
+
+        // Library Secret Trigger
+        let libClicks = 0;
+        document.getElementById('conf-trigger').addEventListener('click', () => {
+            libClicks++;
+            if (libClicks === 3) {
+                document.body.style.background = "#fff";
+                document.body.innerHTML = "<h1 style='color: #4a5d23; font-family: Inter; text-align: center; margin-top: 40vh;'>OPENING_UNIVERSAL_LIBRARY...</h1>";
+                setTimeout(() => {
+                    window.location.href = 'library.html';
+                }, 1200);
+            }
+        });
     </script>
 </body>
 </html>

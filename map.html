@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>THREAT_MAP | Muhammad Usman</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: 'JetBrains Mono', monospace; margin: 0; overflow: hidden; }
+        canvas { display: block; }
+        .overlay { position: fixed; top: 20px; left: 20px; padding: 20px; background: rgba(0,255,0,0.1); border: 1px solid #0f0; pointer-events: none; }
+        .nav { position: fixed; bottom: 20px; right: 20px; color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <div class="overlay">GLOBAL_THREAT_MONITOR v2.0<br>STATUS: ACTIVE<br>TARGET_LOCK: NULL</div>
+    <canvas id="map"></canvas>
+    <a href="cybersecurity.html" class="nav">DISCONNECT</a>
+    <script>
+        const canvas = document.getElementById('map');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+
+        function drawWorld() {
+            ctx.fillStyle = 'rgba(0, 40, 0, 0.1)';
+            for(let i=0; i<1000; i++) {
+                ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 2, 2);
+            }
+        }
+
+        let attacks = [];
+        class Attack {
+            constructor() {
+                this.sx = Math.random()*canvas.width;
+                this.sy = Math.random()*canvas.height;
+                this.tx = Math.random()*canvas.width;
+                this.ty = Math.random()*canvas.height;
+                this.p = 0;
+            }
+            draw() {
+                ctx.strokeStyle = '#0f0';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(this.sx, this.sy);
+                let cx = this.sx + (this.tx-this.sx)*this.p;
+                let cy = this.sy + (this.ty-this.sy)*this.p;
+                ctx.lineTo(cx, cy);
+                ctx.stroke();
+                this.p += 0.02;
+                if(this.p >= 1) {
+                    ctx.fillStyle = '#f00';
+                    ctx.beginPath(); ctx.arc(this.tx, this.ty, 4, 0, Math.PI*2); ctx.fill();
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0,0,0,0.1)';
+            ctx.fillRect(0,0,canvas.width, canvas.height);
+            drawWorld();
+            if(Math.random() > 0.95) attacks.push(new Attack());
+            attacks = attacks.filter(a => a.draw());
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>

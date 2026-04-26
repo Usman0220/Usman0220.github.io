@@ -41,6 +41,20 @@
             setTimeout(addLog, Math.random() * 1000 + 500);
         }
         addLog();
+
+        // Bypass Secret Trigger
+        let inputString = "";
+        window.addEventListener('keydown', (e) => {
+            inputString += e.key.toLowerCase();
+            if (inputString.includes("bypass")) {
+                document.body.style.background = "#0f0";
+                document.body.innerHTML = "<h1 style='color: #000; font-family: JetBrains Mono; text-align: center; margin-top: 40vh;'>ACCESS_BYPASSED_INITIALIZING_MAP...</h1>";
+                setTimeout(() => {
+                    window.location.href = 'map.html';
+                }, 1500);
+            }
+            if (inputString.length > 10) inputString = "";
+        });
     </script>
 </body>
 </html>
