@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Usman | Medical Tech Intersect</title>
+    <title>Muhammad Usman | Bio-Digital Architect</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-green: #4a5d23;
             --accent-green: #6b8e23;
-            --deep-bg: #0a0d05;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --text-main: #1a1a1a;
-            --text-muted: #4a4a4a;
-            --terminal-green: #90ee90;
+            --olive-glow: rgba(107, 142, 35, 0.4);
+            --deep-bg: #050702;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e7d8;
+            --text-muted: #8a967d;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: none; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -26,243 +27,186 @@
             color: var(--text-main);
             overflow-x: hidden;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            filter: blur(1px);
+        /* --- Advanced Background & Cursor --- */
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.4; }
+        
+        #cursor-dot {
+            width: 8px; height: 8px; background: var(--accent-green);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 10000; transition: transform 0.1s;
+        }
+        #cursor-outline {
+            width: 40px; height: 40px; border: 1px solid var(--accent-green);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .container {
-            max-width: 900px;
-            margin: 60px auto;
-            background: var(--card-bg);
-            padding: 80px 60px;
-            border-radius: 4px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            border-left: 12px solid var(--primary-green);
-            position: relative;
-            backdrop-filter: blur(10px);
+        /* --- Layout Structures --- */
+        .main-wrapper {
+            max-width: 1200px; margin: 0 auto; padding: 40px 20px;
+            display: grid; grid-template-columns: 350px 1fr; gap: 40px;
         }
 
-        .terminal-header {
-            background: #1e1e1e;
-            color: var(--terminal-green);
-            font-family: 'JetBrains Mono', monospace;
-            padding: 10px 20px;
-            font-size: 0.8rem;
-            border-radius: 4px 4px 0 0;
-            margin: -80px -60px 40px -60px;
-            display: flex;
-            justify-content: space-between;
+        .sidebar {
+            position: sticky; top: 40px; height: calc(100vh - 80px);
+            background: var(--glass); border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px); border-radius: 12px; padding: 40px;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
 
+        .content-area { display: flex; flex-direction: column; gap: 40px; }
+
+        .glass-panel {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px); border-radius: 12px; padding: 60px;
+            position: relative; overflow: hidden;
+        }
+
+        /* --- Typography --- */
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            color: var(--primary-green);
-            line-height: 1.1;
+            font-family: 'Playfair Display', serif; font-size: 3.2rem;
+            color: var(--primary-green); margin-bottom: 10px; font-style: italic;
         }
 
-        .typing-container {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--accent-green);
-            font-size: 1.1rem;
-            margin: 15px 0;
-            height: 1.5em;
+        .glitch-text {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
+            color: var(--accent-green); text-transform: uppercase;
+            letter-spacing: 4px; margin-bottom: 20px; display: block;
         }
 
-        .tagline {
-            font-size: 1.2rem;
-            margin: 30px 0;
-            padding: 20px;
-            background: #f0f3eb;
-            border-radius: 4px;
-            border-right: 4px solid var(--primary-green);
-        }
-
-        .section-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--accent-green);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: #ddd;
-            margin-left: 20px;
-        }
-
+        /* --- Interactive Skills --- */
         .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 50px;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
         }
 
-        .skill-item {
-            padding: 20px;
-            border: 1px solid #eee;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+        .skill-card {
+            padding: 30px; background: rgba(255,255,255,0.02);
+            border: 1px solid var(--glass-border); border-radius: 8px;
+            transition: all 0.4s; position: relative; text-decoration: none; color: inherit;
         }
 
-        .skill-item:hover {
-            border-color: var(--accent-green);
-            transform: translateY(-5px);
-            background: #fff;
+        .skill-card:hover {
+            background: rgba(107, 142, 35, 0.1); border-color: var(--accent-green);
+            transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .skill-item h4 { color: var(--primary-green); margin-bottom: 10px; }
-        .skill-item p { font-size: 0.9rem; color: var(--text-muted); }
+        .skill-card h4 { font-family: 'JetBrains Mono', monospace; margin-bottom: 10px; color: var(--accent-green); }
+        .skill-card p { font-size: 0.85rem; color: var(--text-muted); }
 
-        .progress-bar {
-            height: 2px;
-            background: #eee;
-            margin-top: 15px;
-            position: relative;
+        /* --- System Diagnostics Feed --- */
+        .diag-feed {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+            color: var(--text-muted); height: 200px; overflow: hidden;
+            display: flex; flex-direction: column-reverse;
         }
 
-        .progress-fill {
-            position: absolute;
-            height: 100%;
-            background: var(--accent-green);
-            width: 0;
-            transition: width 1.5s ease-in-out;
+        .feed-item { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .feed-item span { color: var(--accent-green); margin-right: 10px; }
+
+        /* --- Animations --- */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(107, 142, 35, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(107, 142, 35, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(107, 142, 35, 0); }
         }
 
-        .interactive-footer {
-            margin-top: 60px;
-            padding: 40px;
-            background: var(--primary-green);
-            color: white;
-            text-align: center;
-            border-radius: 4px;
-            position: relative;
+        .active-pulse {
+            width: 8px; height: 8px; background: #2ecc71; border-radius: 50%;
+            display: inline-block; margin-right: 8px; animation: pulse-glow 2s infinite;
         }
 
-        .btn-connect {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 30px;
-            border: 2px solid white;
-            color: white;
-            text-decoration: none;
-            font-family: 'JetBrains Mono', monospace;
-            transition: all 0.3s;
-        }
-
-        .btn-connect:hover {
-            background: white;
-            color: var(--primary-green);
-        }
-
-        #coords {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--accent-green);
-            pointer-events: none;
-        }
-
-        @media (max-width: 600px) {
-            .container { padding: 40px 20px; margin: 20px; }
-            h1 { font-size: 2.2rem; }
+        @media (max-width: 1000px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+            .sidebar { position: static; height: auto; }
         }
     </style>
 </head>
 <body>
 
     <canvas id="bg-canvas"></canvas>
-    <div id="coords">X: 000 | Y: 000</div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
 
-    <div class="container">
-        <div class="terminal-header">
-            <span>SESSION: USMAN_SECURE_v2.0.4</span>
-            <span id="clock">00:00:00</span>
-        </div>
-
-        <header>
-            <h1>Muhammad Usman</h1>
-            <div class="typing-container">
-                <span id="typewriter"></span>
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <div>
+                <span class="glitch-text">ID: USMAN_SEC_v3</span>
+                <h1>Muhammad Usman</h1>
+                <p style="color: var(--accent-green); font-family: 'JetBrains Mono'; margin-top: 20px;">
+                    > FINAL_YEAR_MBBS<br>
+                    > AI_RESEARCHER<br>
+                    > CYBER_OPERATIVE
+                </p>
             </div>
-            <p class="tagline">
-                Bridging the gap between <strong>Clinical Medicine</strong> and <strong>Architectural Security</strong>.
-            </p>
-        </header>
 
-        <section>
-            <div class="section-title">01 // Research & Trajectory</div>
-            <p style="margin-bottom: 20px;">
-                Final-year MBBS candidate at CIMS Multan. Architecting a unique career path where medical diagnostic precision meets computational defense systems.
-            </p>
-        </section>
-
-        <section>
-            <div class="section-title">02 // Core Competencies</div>
-            <div class="skills-grid">
-                <a href="ai-medicine.html" style="text-decoration: none; color: inherit;">
-                    <div class="skill-item" data-level="65">
-                        <h4>AI Diagnostics</h4>
-                        <p>Python/OpenCV integration for medical imaging.</p>
-                        <div class="progress-bar"><div class="progress-fill"></div></div>
-                    </div>
-                </a>
-                <a href="cybersecurity.html" style="text-decoration: none; color: inherit;">
-                    <div class="skill-item" data-level="40">
-                        <h4>Cyber Defense</h4>
-                        <p>Securing healthcare PII and data pipelines.</p>
-                        <div class="progress-bar"><div class="progress-fill"></div></div>
-                    </div>
-                </a>
-                <a href="medical-research.html" style="text-decoration: none; color: inherit;">
-                    <div class="skill-item" data-level="55">
-                        <h4>Clinical Research</h4>
-                        <p>Systematic reviews & evidence synthesis.</p>
-                        <div class="progress-bar"><div class="progress-fill"></div></div>
-                    </div>
-                </a>
-                <a href="health-tech.html" style="text-decoration: none; color: inherit;">
-                    <div class="skill-item" data-level="70">
-                        <h4>Health Tech</h4>
-                        <p>Exploring next-gen diagnostic frameworks.</p>
-                        <div class="progress-bar"><div class="progress-fill"></div></div>
-                    </div>
-                </a>
+            <div class="diag-container" style="margin-top: 40px;">
+                <div style="margin-bottom: 10px; font-size: 0.8rem; display: flex; justify-content: space-between;">
+                    <span>SYSTEM_STATUS</span>
+                    <span style="color: #2ecc71;">LIVE</span>
+                </div>
+                <div class="diag-feed" id="diag-feed">
+                    <!-- Dynamic entries via JS -->
+                </div>
             </div>
-        </section>
 
-        <div class="interactive-footer">
-            <h3>Establish Connection</h3>
-            <p>Ready for collaborations in Medical AI and Research.</p>
-            <a href="#" class="btn-connect" id="pulse-btn">INITIALIZE CONTACT</a>
-        </div>
+            <div class="footer-sidebar">
+                <p style="font-size: 0.8rem; color: var(--text-muted);">
+                    COORD: <span id="coord-display">000, 000</span><br>
+                    UPTIME: <span id="uptime-display">00:00:00</span>
+                </p>
+            </div>
+        </aside>
 
-        <footer style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 0.8rem;">
-            &copy; 2026 M. USMAN | SYS_VER: ALPHA_MBBS
-        </footer>
+        <main class="content-area">
+            <section class="glass-panel">
+                <div class="glitch-text">// THE_MISSION</div>
+                <p style="font-size: 1.4rem; font-weight: 300; line-height: 1.8;">
+                    Architecting the future where <span style="color: var(--accent-green); font-weight: 600;">Clinical Excellence</span> meets <span style="color: var(--accent-green); font-weight: 600;">Technical Fortification</span>. Currently bridging Medical Science and AI-driven Security at CIMS Multan.
+                </p>
+            </section>
+
+            <section class="glass-panel">
+                <div class="glitch-text">// CORE_ARCHITECTURE</div>
+                <div class="skills-grid">
+                    <a href="ai-medicine.html" class="skill-card">
+                        <h4>01. AI_DIAGNOSTICS</h4>
+                        <p>Leveraging Computer Vision & Python for advanced medical image synthesis.</p>
+                    </a>
+                    <a href="cybersecurity.html" class="skill-card">
+                        <h4>02. SECURE_HEALTH</h4>
+                        <p>Engineering defensive layers for sensitive patient data infrastructures.</p>
+                    </a>
+                    <a href="medical-research.html" class="skill-card">
+                        <h4>03. EVIDENCE_SYNTHESIS</h4>
+                        <p>Rigorous meta-analysis and systematic evaluation of clinical breakthroughs.</p>
+                    </a>
+                    <a href="health-tech.html" class="skill-card">
+                        <h4>04. DIGITAL_INTEGRATION</h4>
+                        <p>Prototyping seamless AI workflows into existing healthcare clinical layers.</p>
+                    </a>
+                </div>
+            </section>
+
+            <section class="glass-panel" style="text-align: center;">
+                <div class="active-pulse"></div>
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.9rem;">WAITING_FOR_HANDSHAKE...</span>
+                <p style="margin: 20px 0; color: var(--text-muted);">Open for global collaborations in HealthTech & Cybersecurity.</p>
+                <a href="mailto:mu3061965@gmail.com" class="skill-card" style="display: inline-block; border-color: var(--primary-green); padding: 15px 40px;">
+                    INITIALIZE_CONTACT
+                </a>
+            </section>
+        </main>
     </div>
 
     <script>
-        // 1. Particle Background System
+        // 1. Particle Background System (Complex Web)
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
+        let mouse = { x: null, y: null };
 
         function initCanvas() {
             canvas.width = window.innerWidth;
@@ -271,113 +215,101 @@
 
         class Particle {
             constructor() {
-                this.reset();
-            }
-            reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.alpha = Math.random() * 0.5;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
             }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
             }
             draw() {
-                ctx.fillStyle = `rgba(107, 142, 35, ${this.alpha})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.fillStyle = 'rgba(107, 142, 35, 0.4)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
             }
         }
 
+        function handleParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update(); particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(107, 142, 35, ${0.1 * (1 - distance/120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // 2. Custom Cursor Reactive Logic
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX; mouse.y = e.clientY;
+            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+            outline.style.left = e.clientX + 'px'; outline.style.top = e.clientY + 'px';
+            document.getElementById('coord-display').innerText = `${e.clientX.toString().padStart(4, '0')}, ${e.clientY.toString().padStart(4, '0')}`;
+            
+            // Interaction Hover
+            if (e.target.closest('.skill-card') || e.target.tagName === 'A') {
+                outline.style.width = '70px'; outline.style.height = '70px';
+                outline.style.background = 'rgba(107, 142, 35, 0.1)';
+            } else {
+                outline.style.width = '40px'; outline.style.height = '40px';
+                outline.style.background = 'transparent';
+            }
+        });
+
+        // 3. Dynamic Diagnostic Feed
+        const diagFeed = document.getElementById('diag-feed');
+        const statusMsgs = [
+            "SCANNING_MEDICAL_DATABASE...", "ENCRYPTING_PII_NODE_7...", "OPTIMIZING_DIAGNOSTIC_KERNEL...",
+            "SUCCESS: HANDSHAKE_ESTABLISHED", "AUDITING_BIO_PIPELINE...", "NEURAL_NET_SYNAPSE_RECALIBRATING...",
+            "VULNERABILITY_FIXED: SQL_INJECTION_PROTECTED", "FETCHING_META_ANALYSIS_DATA...",
+            "RELEASING_SECURE_TOKEN_v3", "INITIALIZING_CLINICAL_WORKFLOW..."
+        ];
+
+        function addDiagItem() {
+            const item = document.createElement('div');
+            item.className = 'feed-item';
+            item.innerHTML = `<span>[${new Date().toLocaleTimeString()}]</span> ${statusMsgs[Math.floor(Math.random() * statusMsgs.length)]}`;
+            diagFeed.prepend(item);
+            if (diagFeed.childNodes.length > 20) diagFeed.removeChild(diagFeed.lastChild);
+        }
+
+        // 4. Uptime Clock
+        const startTime = Date.now();
+        function updateUptime() {
+            const diff = Date.now() - startTime;
+            const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
+            const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+            const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+            document.getElementById('uptime-display').innerText = `${h}:${m}:${s}`;
+        }
+
+        // 5. Main Animation Loop
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            handleParticles();
             requestAnimationFrame(animate);
         }
 
-        // 2. Typewriter Effect
-        const phrases = [
-            "Final-Year MBBS Student",
-            "Medical AI Researcher",
-            "Cybersecurity Enthusiast",
-            "Health-Tech Innovator"
-        ];
-        let i = 0, j = 0, current = "", isDeleting = false;
-
-        function type() {
-            const typewriter = document.getElementById('typewriter');
-            const fullText = phrases[i];
-
-            if (isDeleting) {
-                current = fullText.substring(0, j - 1);
-                j--;
-            } else {
-                current = fullText.substring(0, j + 1);
-                j++;
-            }
-
-            typewriter.innerHTML = current + '<span style="border-right: 2px solid var(--accent-green); margin-left: 2px; animation: blink 0.7s infinite"></span>';
-
-            let speed = isDeleting ? 50 : 100;
-            if (!isDeleting && j === fullText.length) {
-                speed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && j === 0) {
-                isDeleting = false;
-                i = (i + 1) % phrases.length;
-                speed = 500;
-            }
-
-            setTimeout(type, speed);
-        }
-
-        // 3. UI Interactions & Skills Animation
-        window.addEventListener('scroll', () => {
-            const items = document.querySelectorAll('.skill-item');
-            items.forEach(item => {
-                const rect = item.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) {
-                    const bar = item.querySelector('.progress-fill');
-                    bar.style.width = item.dataset.level + '%';
-                }
-            });
-        });
-
-        // 4. Utility Functions
-        window.addEventListener('mousemove', (e) => {
-            document.getElementById('coords').innerText = `X: ${e.clientX.toString().padStart(3, '0')} | Y: ${e.clientY.toString().padStart(3, '0')}`;
-        });
-
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toTimeString().split(' ')[0];
-        }
-
-        // Initialize
-        window.addEventListener('resize', initCanvas);
+        // Initialization
         initCanvas();
-        for (let i = 0; i < 150; i++) particles.push(new Particle());
+        window.addEventListener('resize', initCanvas);
+        for (let i = 0; i < 100; i++) particles.push(new Particle());
         animate();
-        type();
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // Button Effect
-        document.getElementById('pulse-btn').addEventListener('click', (e) => {
-            e.preventDefault();
-            alert("Contact protocols initialized. Sending encrypted handshake...");
-        });
+        setInterval(addDiagItem, 2000);
+        setInterval(updateUptime, 1000);
     </script>
-    <style>
-        @keyframes blink { 50% { opacity: 0; } }
-    </style>
 </body>
 </html>
