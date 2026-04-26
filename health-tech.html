@@ -345,11 +345,18 @@
         let dnaClicks = 0;
         document.getElementById('bpm-trigger').addEventListener('click', () => {
             dnaClicks++;
-            if (dnaClicks === 4) {
+            if (dnaClicks === 3) {
                 document.body.style.background = "#02050a";
                 document.body.innerHTML = "<h1 style='color: #3498db; font-family: JetBrains Mono; text-align: center; margin-top: 40vh; letter-spacing: 5px;'>SEQUENCING_GENOME...</h1>";
                 setTimeout(() => {
                     window.location.href = 'dna.html';
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>
+na.html';
                 }, 1500);
             }
         });

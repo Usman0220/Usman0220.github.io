@@ -78,11 +78,17 @@
         let deepClicks = 0;
         document.getElementById('deep-trigger').addEventListener('click', () => {
             deepClicks++;
-            if (deepClicks === 5) {
+            if (deepClicks === 3) {
                 document.body.style.background = "#0a1a05";
                 document.body.innerHTML = "<h1 style='color: #6b8e23; font-family: JetBrains Mono; text-align: center; margin-top: 20vh;'>INITIATING_ROOT_SYNC...</h1>";
                 setTimeout(() => {
                     window.location.href = 'tree.html';
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>';
                 }, 1500);
             }
         });

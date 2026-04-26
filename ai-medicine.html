@@ -74,11 +74,18 @@
         let brainClicks = 0;
         document.getElementById('brain-trigger').addEventListener('click', () => {
             brainClicks++;
-            if (brainClicks === 5) {
+            if (brainClicks === 3) {
                 document.body.style.background = "#ffffff";
                 document.body.innerHTML = "<h1 style='color: #4a5d23; font-family: Inter; text-align: center; margin-top: 40vh;'>MAPPING_NEURAL_SYNAPSE...</h1>";
                 setTimeout(() => {
                     window.location.href = 'brain.html';
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
+ml';
                 }, 1000);
             }
         });
