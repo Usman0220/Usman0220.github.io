@@ -294,28 +294,7 @@
             document.getElementById('uptime-display').innerText = `${h}:${m}:${s}`;
         }
 
-        // 5. Secret System Override Trigger
-        let clickCount = 0;
-        let lastClick = 0;
-        document.getElementById('secret-trigger').addEventListener('click', () => {
-            const now = Date.now();
-            if (now - lastClick < 2000) {
-                clickCount++;
-            } else {
-                clickCount = 1;
-            }
-            lastClick = now;
-
-            if (clickCount === 3) {
-                document.body.style.transition = 'all 0.5s';
-                document.body.style.filter = 'invert(1) hue-rotate(90deg)';
-                setTimeout(() => {
-                    window.location.href = 'vault.html';
-                }, 800);
-            }
-        });
-
-        // 6. Main Animation Loop
+        // 5. Main Animation Loop
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             handleParticles();
