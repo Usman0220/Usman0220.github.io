@@ -2,80 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI in Medicine | Muhammad Usman</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #4a5d23; --accent: #6b8e23; --bg: #0a0d05; --text: #d4dbc7; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; overflow: hidden; }
-        .nav-back { position: fixed; top: 20px; left: 20px; color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; z-index: 100; }
-        .canvas-container { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
-        .content { position: relative; z-index: 10; padding: 100px 50px; max-width: 800px; }
-        h1 { font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
-        .terminal { background: rgba(0,0,0,0.8); padding: 20px; border-left: 4px solid var(--primary); font-family: 'JetBrains Mono'; font-size: 0.9rem; line-height: 1.5; }
-        .status-pulse { display: inline-block; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; margin-right: 10px; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        .nav-back {
+            display: inline-block;
+            margin: 24px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .nav-back:hover { text-decoration: underline; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 24px 80px; }
+        h1 { font-size: 2rem; color: #0f172a; margin-bottom: 16px; }
+        .badge {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #2563eb;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        p { color: #334155; margin-bottom: 16px; font-size: 1rem; }
+        h2 { font-size: 1.3rem; color: #0f172a; margin: 32px 0 12px; }
+        ul { padding-left: 20px; margin-bottom: 16px; }
+        li { color: #334155; margin-bottom: 6px; }
+        .highlight {
+            background: #fff;
+            border-left: 4px solid #2563eb;
+            padding: 20px 24px;
+            border-radius: 0 8px 8px 0;
+            margin: 24px 0;
+        }
+        .highlight p { margin-bottom: 0; }
+        @media (max-width: 640px) {
+            .container { padding: 24px 16px; }
+            h1 { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
-    <a href="index.html" class="nav-back">< [RETURN_TO_CORE]</a>
-    <canvas id="neural-net" class="canvas-container"></canvas>
-    <div class="content">
-        <h1>AI Diagnostics <span style="font-size: 0.8rem; vertical-align: middle; padding: 4px 10px; border: 1px solid var(--accent); border-radius: 4px; color: var(--accent); margin-left: 15px;">DEMO</span></h1>
-        <div class="terminal">
-            <p><span class="status-pulse" id="brain-trigger" style="cursor: pointer;"></span>Initializing Medical AI Pipeline...</p>
-            <p>> Loading Python/OpenCV kernels...</p>
-            <p>> Analyzing DICOM datasets: [SUCCESS]</p>
-            <p>> Learning diagnostic patterns for medical imaging.</p>
-            <p style="color: var(--accent); margin-top: 20px;">"Bridging clinical intuition with computational precision."</p>
+    <a href="index.html" class="nav-back">&larr; Home</a>
+    <div class="container">
+        <div class="badge">AI in Medicine</div>
+        <h1>Artificial Intelligence in Clinical Medicine</h1>
+        <p>
+            The integration of artificial intelligence into medical practice is transforming
+            how we diagnose, treat, and manage disease. My work focuses on leveraging
+            computer vision and machine learning to augment clinical decision-making.
+        </p>
+
+        <h2>Key Areas</h2>
+        <ul>
+            <li><strong>Medical Imaging</strong> &mdash; Applying deep learning to radiology and pathology images for pattern recognition.</li>
+            <li><strong>Predictive Analytics</strong> &mdash; Developing risk stratification models from electronic health records.</li>
+            <li><strong>Clinical Decision Support</strong> &mdash; Building tools that integrate AI recommendations into physician workflows.</li>
+        </ul>
+
+        <div class="highlight">
+            <p>
+                &ldquo;Bridging clinical intuition with computational precision to improve patient outcomes.&rdquo;
+            </p>
         </div>
+
+        <h2>Current Work</h2>
+        <p>
+            Exploring Python-based computer vision pipelines for medical image analysis,
+            with a focus on interpretability and clinical validation. Collaborating with
+            clinicians to ensure AI tools meet real-world bedside needs.
+        </p>
     </div>
-    <script>
-        const canvas = document.getElementById('neural-net');
-        const ctx = canvas.getContext('2d');
-        let nodes = [];
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-
-        class Node {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 1;
-                this.vy = (Math.random() - 0.5) * 1;
-            }
-            update() {
-                this.x += this.vx; this.y += this.vy;
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-        }
-
-        for(let i=0; i<80; i++) nodes.push(new Node());
-
-        function draw() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.strokeStyle = 'rgba(107, 142, 35, 0.2)';
-            ctx.fillStyle = '#6b8e23';
-            nodes.forEach((n, i) => {
-                n.update();
-                ctx.beginPath(); ctx.arc(n.x, n.y, 2, 0, Math.PI*2); ctx.fill();
-                nodes.slice(i+1).forEach(m => {
-                    let d = Math.hypot(n.x-m.x, n.y-m.y);
-                    if(d < 150) {
-                        ctx.lineWidth = (150-d)/50;
-                        ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y); ctx.stroke();
-                    }
-                });
-            });
-            requestAnimationFrame(draw);
-        }
-        draw();
-    </script>
-</body>
-</html>
-ml';
-                }, 1000);
-            }
-        });
-    </script>
 </body>
 </html>

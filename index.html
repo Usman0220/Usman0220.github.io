@@ -3,311 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Usman | Bio-Digital Architect</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <title>Dr. Muhammad Usman | Medical Professional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-green: #4a5d23;
-            --accent-green: #6b8e23;
-            --olive-glow: rgba(107, 142, 35, 0.4);
-            --deep-bg: #050702;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #e0e7d8;
-            --text-muted: #8a967d;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--deep-bg);
-            color: var(--text-main);
-            overflow-x: hidden;
-            min-height: 100vh;
+            background: #f8fafc;
+            color: #1a202c;
             line-height: 1.6;
         }
-
-        /* --- Spotlight Effect --- */
-        #spotlight {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(107, 142, 35, 0.15), transparent 80%);
-            z-index: 1;
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 24px; }
+        header { text-align: center; margin-bottom: 60px; }
+        .badge {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #2563eb;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
         }
-
-        /* --- Layout Structures --- */
-        .main-wrapper {
-            max-width: 1200px; margin: 0 auto; padding: 40px 20px;
-            display: grid; grid-template-columns: 350px 1fr; gap: 40px;
-            position: relative; z-index: 2;
+        h1 { font-size: 2.8rem; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+        .subtitle { font-size: 1.2rem; color: #475569; font-weight: 300; }
+        .divider { width: 60px; height: 3px; background: #2563eb; margin: 20px auto; border-radius: 2px; }
+        .about { max-width: 700px; margin: 0 auto 60px; text-align: center; color: #334155; font-size: 1.05rem; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 60px; }
+        .card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px;
+            transition: box-shadow .2s;
+            text-decoration: none;
+            color: inherit;
         }
-
-        .sidebar {
-            position: sticky; top: 40px; height: calc(100vh - 80px);
-            background: var(--glass); border: 1px solid var(--glass-border);
-            backdrop-filter: blur(20px); border-radius: 12px; padding: 40px;
-            display: flex; flex-direction: column; justify-content: space-between;
+        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .card h3 { font-size: 1.1rem; color: #2563eb; margin-bottom: 8px; }
+        .card p { font-size: 0.9rem; color: #64748b; }
+        .card .number {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
         }
-
-        .content-area { display: flex; flex-direction: column; gap: 40px; }
-
-        .glass-panel {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            backdrop-filter: blur(20px); border-radius: 12px; padding: 60px;
-            position: relative; overflow: hidden;
+        .contact {
+            text-align: center;
+            padding: 40px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
         }
-
-        /* --- Typography --- */
-        h1 {
-            font-family: 'Playfair Display', serif; font-size: 3.2rem;
-            color: var(--primary-green); margin-bottom: 10px; font-style: italic;
+        .contact h2 { font-size: 1.3rem; margin-bottom: 8px; }
+        .contact p { color: #64748b; margin-bottom: 20px; }
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            padding: 12px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background .2s;
         }
-
-        .glitch-text {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
-            color: var(--accent-green); text-transform: uppercase;
-            letter-spacing: 4px; margin-bottom: 20px; display: block;
-        }
-
-        /* --- Interactive Skills --- */
-        .skills-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
-        }
-
-        .skill-card {
-            padding: 30px; background: rgba(255,255,255,0.02);
-            border: 1px solid var(--glass-border); border-radius: 8px;
-            transition: all 0.4s; position: relative; text-decoration: none; color: inherit;
-        }
-
-        .skill-card:hover {
-            background: rgba(107, 142, 35, 0.1); border-color: var(--accent-green);
-            transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .skill-card h4 { font-family: 'JetBrains Mono', monospace; margin-bottom: 10px; color: var(--accent-green); }
-        .skill-card p { font-size: 0.85rem; color: var(--text-muted); }
-
-        /* --- System Diagnostics Feed --- */
-        .diag-feed {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
-            color: var(--text-muted); height: 200px; overflow: hidden;
-            display: flex; flex-direction: column-reverse;
-        }
-
-        .feed-item { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .feed-item span { color: var(--accent-green); margin-right: 10px; }
-
-        /* --- Animations --- */
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 0 0 rgba(107, 142, 35, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(107, 142, 35, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(107, 142, 35, 0); }
-        }
-
-        .active-pulse {
-            width: 8px; height: 8px; background: #2ecc71; border-radius: 50%;
-            display: inline-block; margin-right: 8px; animation: pulse-glow 2s infinite;
-        }
-
-        #secret-trigger:hover {
-            text-shadow: 0 0 8px var(--accent-green);
-            transition: all 0.3s;
-        }
-
-        #bg-canvas { position: fixed; top: 0; left: 0; z-index: 0; opacity: 0.4; }
-
-        @media (max-width: 1000px) {
-            .main-wrapper { grid-template-columns: 1fr; }
-            .sidebar { position: static; height: auto; }
+        .btn:hover { background: #1d4ed8; }
+        footer { text-align: center; margin-top: 40px; color: #94a3b8; font-size: 0.85rem; }
+        @media (max-width: 640px) {
+            .grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+            .container { padding: 40px 16px; }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <div class="badge">MBBS | Medical Researcher</div>
+            <h1>Muhammad Usman</h1>
+            <div class="subtitle">Final Year Medical Student &bull; AI in Healthcare</div>
+            <div class="divider"></div>
+        </header>
 
-    <canvas id="bg-canvas"></canvas>
-    <div id="spotlight"></div>
+        <p class="about">
+            Dedicated to bridging clinical medicine with technological innovation.
+            Currently training at CIMS Multan, focused on integrating AI-driven
+            diagnostics and evidence-based research into patient care.
+        </p>
 
-    <div class="main-wrapper">
-        <aside class="sidebar">
-            <div>
-                <span class="glitch-text">ID: USMAN_SEC_v3</span>
-                <h1>Muhammad Usman</h1>
-                <p style="color: var(--accent-green); font-family: 'JetBrains Mono'; margin-top: 20px;">
-                    > FINAL_YEAR_MBBS<br>
-                    > AI_RESEARCHER<br>
-                    > RESEARCHER
-                </p>
-            </div>
+        <div class="grid">
+            <a href="ai-medicine.html" class="card">
+                <div class="number">01</div>
+                <h3>AI in Medicine</h3>
+                <p>Exploring computer vision and machine learning applications for medical imaging and diagnosis.</p>
+            </a>
+            <a href="medical-research.html" class="card">
+                <div class="number">02</div>
+                <h3>Medical Research</h3>
+                <p>Systematic reviews, meta-analysis, and evidence synthesis for clinical decision-making.</p>
+            </a>
+            <a href="health-tech.html" class="card">
+                <div class="number">03</div>
+                <h3>Health-Tech Innovation</h3>
+                <p>Developing digital health solutions and workflows for modern healthcare delivery.</p>
+            </a>
+            <a href="library.html" class="card">
+                <div class="number">04</div>
+                <h3>Knowledge Base</h3>
+                <p>Curated medical literature, protocols, and clinical reference resources.</p>
+            </a>
+        </div>
 
-            <div class="diag-container" style="margin-top: 40px;">
-                <div style="margin-bottom: 10px; font-size: 0.8rem; display: flex; justify-content: space-between;">
-                    <span>SYSTEM_STATUS</span>
-                    <span style="color: #2ecc71; cursor: pointer;" id="secret-trigger"><span class="active-pulse"></span>LIVE</span>
-                </div>
-                <div class="diag-feed" id="diag-feed">
-                    <!-- Dynamic entries via JS -->
-                </div>
-            </div>
+        <div class="contact">
+            <h2>Get in Touch</h2>
+            <p>Open for collaborations in medical research and health-tech innovation.</p>
+            <a href="mailto:mu3061965@gmail.com" class="btn">Contact Me</a>
+        </div>
 
-            <div class="footer-sidebar">
-                <p style="font-size: 0.8rem; color: var(--text-muted);">
-                    COORD: <span id="coord-display">0000, 0000</span><br>
-                    UPTIME: <span id="uptime-display">00:00:00</span>
-                </p>
-            </div>
-        </aside>
-
-        <main class="content-area">
-            <section class="glass-panel">
-                <div class="glitch-text">// THE_MISSION</div>
-                <p style="font-size: 1.4rem; font-weight: 300; line-height: 1.8;">
-                    Architecting the future where <span style="color: var(--accent-green); font-weight: 600;">Clinical Excellence</span> meets <span style="color: var(--accent-green); font-weight: 600;">Innovation</span>. Currently bridging Medical Science and AI at CIMS Multan.
-                </p>
-            </section>
-
-            <section class="glass-panel">
-                <div class="glitch-text">// CORE_ARCHITECTURE</div>
-                <div class="skills-grid">
-                    <a href="ai-medicine.html" class="skill-card">
-                        <h4>01. AI_DIAGNOSTICS</h4>
-                        <p>Leveraging Computer Vision & Python for advanced medical image synthesis.</p>
-                    </a>
-                    <a href="medical-research.html" class="skill-card">
-                        <h4>02. EVIDENCE_SYNTHESIS</h4>
-                        <p>Rigorous meta-analysis and systematic evaluation of clinical breakthroughs.</p>
-                    </a>
-                    <a href="health-tech.html" class="skill-card">
-                        <h4>03. DIGITAL_INTEGRATION</h4>
-                        <p>Prototyping seamless AI workflows into existing healthcare clinical layers.</p>
-                    </a>
-                    <a href="library.html" class="skill-card">
-                        <h4>04. KNOWLEDGE_BASE</h4>
-                        <p>Curated medical literature and clinical reference resources.</p>
-                    </a>
-                </div>
-            </section>
-
-            <section class="glass-panel" style="text-align: center;">
-                <div class="active-pulse"></div>
-                <span style="font-family: 'JetBrains Mono'; font-size: 0.9rem;">WAITING_FOR_HANDSHAKE...</span>
-                <p style="margin: 20px 0; color: var(--text-muted);">Open for global collaborations in HealthTech & Medical Research.</p>
-                <a href="mailto:mu3061965@gmail.com" class="skill-card" style="display: inline-block; border-color: var(--primary-green); padding: 15px 40px;">
-                    INITIALIZE_CONTACT
-                </a>
-            </section>
-        </main>
+        <footer>&copy; 2026 Muhammad Usman</footer>
     </div>
-
-    <script>
-        // 1. Particle Background System
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let mouse = { x: 0, y: 0 };
-
-        function initCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.speedY = (Math.random() - 0.5) * 0.3;
-            }
-            update() {
-                this.x += this.speedX; this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(107, 142, 35, 0.4)';
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
-            }
-        }
-
-        function handleParticles() {
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update(); particles[i].draw();
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 120) {
-                        ctx.strokeStyle = `rgba(107, 142, 35, ${0.1 * (1 - distance/120)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        // 2. Interactive Spotlight & Coordinate Logic
-        const spotlight = document.getElementById('spotlight');
-
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX; 
-            mouse.y = e.clientY;
-            
-            spotlight.style.setProperty('--x', e.clientX + 'px');
-            spotlight.style.setProperty('--y', e.clientY + 'px');
-
-            document.getElementById('coord-display').innerText = `${e.clientX.toString().padStart(4, '0')}, ${e.clientY.toString().padStart(4, '0')}`;
-        });
-
-        // 3. Dynamic Diagnostic Feed
-        const diagFeed = document.getElementById('diag-feed');
-        const statusMsgs = [
-            "SCANNING_MEDICAL_DATABASE...", "LOADING_CLINICAL_DATA...", "OPTIMIZING_DIAGNOSTIC_KERNEL...",
-            "SUCCESS: HANDSHAKE_ESTABLISHED", "AUDITING_BIO_PIPELINE...", "NEURAL_NET_SYNAPSE_RECALIBRATING...",
-            "FETCHING_META_ANALYSIS_DATA...",
-            "INITIALIZING_CLINICAL_WORKFLOW..."
-        ];
-
-        function addDiagItem() {
-            const item = document.createElement('div');
-            item.className = 'feed-item';
-            item.innerHTML = `<span>[${new Date().toLocaleTimeString()}]</span> ${statusMsgs[Math.floor(Math.random() * statusMsgs.length)]}`;
-            diagFeed.prepend(item);
-            if (diagFeed.childNodes.length > 20) diagFeed.removeChild(diagFeed.lastChild);
-        }
-
-        // 4. Uptime Clock
-        const startTime = Date.now();
-        function updateUptime() {
-            const diff = Date.now() - startTime;
-            const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
-            const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-            const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
-            document.getElementById('uptime-display').innerText = `${h}:${m}:${s}`;
-        }
-
-        // 5. Main Animation Loop
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            handleParticles();
-            requestAnimationFrame(animate);
-        }
-
-        // Initialization
-        initCanvas();
-        window.addEventListener('resize', initCanvas);
-        for (let i = 0; i < 100; i++) particles.push(new Particle());
-        animate();
-        setInterval(addDiagItem, 2000);
-        setInterval(updateUptime, 1000);
-    </script>
 </body>
 </html>
