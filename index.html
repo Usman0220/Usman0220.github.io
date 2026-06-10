@@ -49,6 +49,25 @@
             letter-spacing: 1px;
             margin-bottom: 12px;
         }
+        .projects { margin-bottom: 60px; }
+        .projects h2 { font-size: 1.1rem; color: #0f172a; margin-bottom: 16px; text-align: center; }
+        .repo-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px 20px;
+            text-decoration: none;
+            color: inherit;
+            margin-bottom: 12px;
+            transition: box-shadow .2s;
+        }
+        .repo-link:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .repo-link .name { font-weight: 600; color: #2563eb; }
+        .repo-link .desc { font-size: 0.85rem; color: #64748b; }
+        .repo-link .arrow { color: #94a3b8; font-size: 1.2rem; }
         .contact {
             text-align: center;
             padding: 40px;
@@ -107,6 +126,24 @@
                 <div class="number">03</div>
                 <h3>Knowledge Base</h3>
                 <p>Curated medical literature, protocols, and clinical reference resources.</p>
+            </a>
+        </div>
+
+        <div class="projects">
+            <h2>Medical Projects</h2>
+            <a href="https://github.com/Usman0220/med-history-app" class="repo-link" target="_blank">
+                <div>
+                    <div class="name">med-history-app</div>
+                    <div class="desc">Clinical history-taking assistant for medical professionals</div>
+                </div>
+                <span class="arrow">&rarr;</span>
+            </a>
+            <a href="https://github.com/Usman0220/ecg-electrolyte-simulator" class="repo-link" target="_blank">
+                <div>
+                    <div class="name">ecg-electrolyte-simulator</div>
+                    <div class="desc">Interactive ECG simulation for visualizing electrolyte imbalances</div>
+                </div>
+                <span class="arrow">&rarr;</span>
             </a>
         </div>
 
